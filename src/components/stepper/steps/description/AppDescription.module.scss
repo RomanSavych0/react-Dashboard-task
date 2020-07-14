@@ -1,0 +1,14 @@
+@import '../Steps';
+
+.Info {
+
+  .map {
+    height: 40vh;
+  }
+}
+
+@media (max-width: 500px) {
+  .Info {
+    margin: 0 0 15%;
+  }
+}

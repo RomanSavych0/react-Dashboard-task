@@ -3,7 +3,6 @@ import {ThunkDispatch} from "redux-thunk";
 import {addObjintoArray} from "../../utils/object-helper";
 import {dashboardActions} from "./actions";
 import {Dispatch} from "redux";
-
 export let initialState = {
 
     apps: [] as Array<IApp>
@@ -25,11 +24,6 @@ const dashboardReducer = (state = initialState, action: DashboardActionTypes):Da
     }
     ;
 };
-// addId:number
-// name:string
-// image:HTMLImageElement|File|String
-// description:string
-// location:string
 
 export let addApp = ( name:string, image:HTMLImageElement|File|String ,
                      description:string, location:string) => {

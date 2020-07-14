@@ -6,6 +6,7 @@ let rootReducer = combineReducers(
     {
         form:formReducer,
         dashboardPage:dashboardReducer,
+
     }
 );
 type RootReducerType = typeof rootReducer;
