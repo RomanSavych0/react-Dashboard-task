@@ -4,6 +4,11 @@
   .twoColumn {
     align-items: center;
   }
+  p{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }
 .errorMessage{
   color:red;

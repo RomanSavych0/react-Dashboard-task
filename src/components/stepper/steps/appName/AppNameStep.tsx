@@ -6,7 +6,6 @@ import {maxLength, maxLength15} from "../../../../forms/validators";
 interface IProps {
     value: string
     onAppNameChange: (appName:string) => void
-    setIsError:(err:boolean)=>void
     isError:boolean
 }
 
@@ -14,24 +13,13 @@ interface IProps {
 let AppName: React.FC<IProps> = (props) => {
 
 
-    let isError=()=>{
-        if(props.value.length >15 || props.value.length < 3) {
-            props.setIsError(true);
-        return true;
-        }
-        else {
-            props.setIsError(false);
-        return false
-        }
-    };
-
 
     return (<div className={classes.Welcome}>
             <p className={classes.title}>Welcome! Let us help you get started!</p>
             <div className={classes.twoColumn}>
                 <p className={classes.boldTitle}>App Name</p>
                 <TextField
-                    error={isError()}
+                    error={props.isError}
                     id="app_name"
                     label=  "Your App Name"
                     variant="outlined"

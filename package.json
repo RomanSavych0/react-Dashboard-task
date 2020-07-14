@@ -14,11 +14,11 @@
     "@types/material-ui": "^0.21.7",
     "@types/node": "^14.0.22",
     "@types/react": "^16.9.43",
+    "@types/react-color": "^3.0.4",
     "@types/react-dom": "^16.9.8",
     "@types/redux-form": "^8.2.7",
     "@typescript-eslint/eslint-plugin": "^2.10.0",
     "@typescript-eslint/parser": "^2.10.0",
-    "Dashboard-container.module.scss": "latest",
     "babel-eslint": "10.1.0",
     "babel-jest": "^24.9.0",
     "babel-loader": "8.1.0",
@@ -88,8 +88,8 @@
   },
   "browserslist": {
     "production": [
-      ">0.2%",
       "not dead",
+      ">0.2%",
       "not op_mini all"
     ],
     "development": [
@@ -102,6 +102,7 @@
     "@types/google-map-react": "^1.1.8",
     "@types/react-redux": "^7.1.9",
     "node-sass": "^4.14.1",
+    "react-color": "^2.18.1",
     "sass-loader": "^9.0.2"
   },
   "jest": {
@@ -147,7 +148,8 @@
       "json",
       "web.jsx",
       "jsx",
-      "node"
+      "node",
+      "scss"
     ],
     "watchPlugins": [
       "jest-watch-typeahead/filename",

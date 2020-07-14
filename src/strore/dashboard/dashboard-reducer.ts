@@ -3,12 +3,12 @@ import {ThunkDispatch} from "redux-thunk";
 import {addObjintoArray} from "../../utils/object-helper";
 import {dashboardActions} from "./actions";
 import {Dispatch} from "redux";
+import React from "react";
+
 export let initialState = {
-
     apps: [] as Array<IApp>
-
 };
-const dashboardReducer = (state = initialState, action: DashboardActionTypes):DashboardItitialState => {
+const dashboardReducer = (state = initialState, action: DashboardActionTypes): DashboardItitialState => {
     switch (action.type) {
         case "SET-APPS":
             return {
@@ -16,7 +16,7 @@ const dashboardReducer = (state = initialState, action: DashboardActionTypes):Da
             };
         case 'ADD-APP':
             return {
-                ...state, apps:addObjintoArray(state.apps, action.app)
+                ...state, apps: addObjintoArray(state.apps, action.app)
             };
 
         default:
@@ -25,13 +25,16 @@ const dashboardReducer = (state = initialState, action: DashboardActionTypes):Da
     ;
 };
 
-export let addApp = ( name:string, image:HTMLImageElement|File|String ,
-                     description:string, location:string) => {
-    let app ={name, image , description, location};
+
+export let addApp = (appName: string, images: Array<File>, ImageUrl: Array<String>, description: string,
+                     isMapChecked: boolean, isCategoryChecked: boolean, color: any, location: string) => {
+    let app = {
+        name: appName, images: images, imageUrl: ImageUrl, description: description,
+        isMapChecked: isMapChecked, isCategoryChecked: isCategoryChecked, color: color, location: location
+    };
     return (dispatch: Dispatch) => {
         dispatch(dashboardActions.addAppAC(app))
     }
-
 };
 
 export default dashboardReducer

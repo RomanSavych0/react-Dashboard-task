@@ -8,9 +8,19 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import AppImage from "./steps/appImage/app-image";
 import AppDescription from "./steps/description/app-desription";
-interface Iprops{
+import AppFeatures from "./steps/features/app-features";
+import AppPreview from "./steps/preview/App-preview";
+import {Color} from "csstype";
+import {ColorChangeHandler, HSLColor, RGBColor} from "react-color";
+import {connect} from "react-redux";
+import {AppStateType} from "../../strore/redux-store";
+import {addApp} from "../../strore/dashboard/dashboard-reducer";
 
+interface Iprops {
+    addApp:(appName: string, images: Array<File>, ImageUrl: Array<String>, description: string,
+            isMapChecked: boolean, isCategoryChecked: boolean, color: any, location: string)=>void
 }
+
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         root: {
@@ -27,48 +37,72 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 function getSteps() {
-    return ['Select master blaster campaign settings', 'Create an ad group', 'Create an ad' , 'Features' , 'Editor'];
+    return ['Welcome', 'Branding', 'Info', 'Features', 'Preview'];
 }
-interface Icenter{
-    lat:any
-    lng:any
-}
-let StepperContainer:React.FC<Iprops>=()=>{
+
+
+let isErrorHandler = (value: string, maxLenght: number) => {
+    if (value.length > maxLenght) {
+        return true
+    } else {
+        return false;
+    }
+};
+let StepperContainer: React.FC<Iprops> = (props) => {
     const classes = useStyles();
     const [activeStep, setActiveStep] = React.useState(0);
-    let [appName , setAppName] =React.useState<string>(' ');
-    let [images , setAppImage] =React.useState<Array<File>>([]);
-    let [url , setUrl]=React.useState<Array<string>>([]);
 
-
-   let  onDropImage=(Files:any , Url:any)=>{
+    let setAppNameWithValidator = (name: string) => {
+        setAppName(name);
+        let isErr: boolean = isErrorHandler(appName, 30);
+        setIsError(isErr);
+    };
+    let onDropImage = (Files: any, Url: any) => {
         setAppImage(Files);
         setUrl(Url);
     };
-    let [description , setAppdescription] =React.useState<string>(' ');
-    let [center , setCenter] = React.useState<Icenter>({lat:59.5,lng:51});
-    let [zoom , setZoom]= React.useState<number>(11);
+    let [appName, setAppName] = React.useState<string>(' ');
+    let [images, setAppImage] = React.useState<Array<File>>([]);
+    let [url, setUrl] = React.useState<Array<string>>([]);
+    let [description, setAppdescription] = React.useState<string>(' ');
     let [isError, setIsError] = React.useState<boolean>(false);
+    let [isMapChecked, setIsMapChecked] = React.useState<boolean>(false);
+    let [isCategoryChecked, setIsCategoryChecked] = React.useState<boolean>(false);
+    let [color, setColor] = React.useState<any>('');
+    let [location, setLocation] = React.useState<string>('');
+    let finishHandler =()=>{props.addApp(appName, images , url, description, isMapChecked,  isCategoryChecked,color, location);
+    handleNext();
+    };
 
 
     function getStepContent(stepIndex: number) {
 
         switch (stepIndex) {
             case 0:
-                return <AppName setIsError ={setIsError} isError={isError} value ={appName}  onAppNameChange={setAppName}/>;
+                return <AppName isError={isError} value={appName} onAppNameChange={setAppNameWithValidator}/>;
             case 1:
-                return <AppImage imageUrl ={url} setAppImage={onDropImage}/>;
+                return <AppImage imageUrl={url} setAppImage={onDropImage}
+                                 color={color} setColor={setColor}
+                />;
             case 2:
-                return <AppDescription zoom={zoom} center ={center} description={description} descChanged={setAppdescription}/>;
+                return <AppDescription zoom={11} center={{lat: 59.5, lng: 51}} description={description}
+                                       location={location} setLocation={setLocation}
+                                       isError={isError}
+                                       descChanged={setAppdescription}/>;
             case 3:
-                return 'Features';
+                return <AppFeatures isCategoryChecked={isCategoryChecked} isMapChecked={isMapChecked}
+                                    setIsCategoryChecked={setIsCategoryChecked} setIsMapChecked={setIsMapChecked}/>;
             case 4:
-                return 'FinalEditor';
+                return <AppPreview appDescription={description} appName={appName} color={color}
+                                   isCategoryChecked={isCategoryChecked}
+                                   ismapChecked={isMapChecked} picture={url}
+                />;
 
             default:
                 return 'Unknown stepIndex';
         }
     }
+
     const steps = getSteps();
 
     const handleNext = () => {
@@ -83,7 +117,7 @@ let StepperContainer:React.FC<Iprops>=()=>{
         setActiveStep(0);
     };
 
-    return(
+    return (
         <div className={classes.root}>
             <Stepper activeStep={activeStep} alternativeLabel>
                 {steps.map((label) => (
@@ -109,9 +143,24 @@ let StepperContainer:React.FC<Iprops>=()=>{
                             >
                                 Back
                             </Button>
-                            <Button variant="contained" color="primary" onClick={handleNext} disabled={isError}>
-                                {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-                            </Button>
+                            <div>
+                                {activeStep === steps.length - 1 ?
+                                    (<Button variant="contained" color="primary" onClick={finishHandler}
+                                             disabled={isError}>
+                                            Finish
+                                        </Button>
+                                    ) : (
+                                        <Button variant="contained" color="primary" onClick={handleNext}
+                                                disabled={isError}>
+                                            Next
+                                        </Button>
+                                    )
+
+
+
+
+                                }
+                            </div>
                         </div>
                     </div>
                 )}
@@ -119,4 +168,8 @@ let StepperContainer:React.FC<Iprops>=()=>{
         </div>
     )
 };
-export default StepperContainer
+let mapStateToProps=(state:AppStateType)=>{
+    return{}
+
+}
+export default connect( mapStateToProps, {addApp})(StepperContainer)

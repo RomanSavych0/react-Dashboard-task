@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import Modal, {ModalProps} from '@material-ui/core/Modal';
 // @ts-ignore
 import classes from './appEditor.module.scss'
-import HorizontalNonLinearStepper from "../stepper/stepper";
 import StepperContainer from "../stepper/Stepper-container";
 interface Iprops {
     isOpened: boolean

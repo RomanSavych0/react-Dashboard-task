@@ -4,45 +4,44 @@ import {AppStateType} from "../../strore/redux-store";
 import {IApp} from "../../strore/dashboard/types";
 import {addApp} from "../../strore/dashboard/dashboard-reducer";
 // @ts-ignore
-import classes from "./Dashboard-container.module.scss"
+import classes from "./DashboardContainer.module.scss"
 import {ModalProps, Paper} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import AppEditor from "../app-editor/AppEditor";
+import Apps from "./apps/Apps";
 
 interface IMapStateToProps {
     apps: Array<IApp>
 }
 
 interface IMapDispatchToProps {
-    addApp: (
-        name: string,
-        image: HTMLImageElement | File | String,
-        description: string,
-        location: string) => void
 
 }
+
 interface IState {
     editorOpened: boolean;
 }
+
 type PropsType = IMapStateToProps & IMapDispatchToProps;
 
-class DashboardContainer extends React.Component<PropsType , IState> {
-    constructor(props:PropsType) {
+class DashboardContainer extends  React.Component<PropsType, IState> {
+    constructor(props: PropsType) {
         super(props);
         this.state = {
             editorOpened: false,
         };
     }
-    openEditor=()=>{this.setState({editorOpened:true})};
-    closeEditor=()=>{this.setState({editorOpened:false})};
 
+    openEditor = () => {
+        this.setState({editorOpened: true})
+    };
+    closeEditor = () => {
+        this.setState({editorOpened: false})
+    };
 
-    componentDidMount(): void {
-        this.props.addApp("da", "pd", "ss", "dd");
-        console.log(this.props.apps)
-    }
 
     render() {
+
         return <div className={classes.apps}>
             <div className={classes.dashboardTools}>
                 <div>
@@ -57,10 +56,13 @@ class DashboardContainer extends React.Component<PropsType , IState> {
                 </div>
             </div>
 
+            <AppEditor isOpened={this.state.editorOpened} onClose={this.closeEditor}/>
+
             <Paper elevation={2}>
+                <Apps apps={this.props.apps}/>
             </Paper>
 
-            <AppEditor isOpened={this.state.editorOpened} onClose={this.closeEditor}/>
+
         </div>
     }
 
@@ -72,4 +74,4 @@ let mapStateToProps = (state: AppStateType): IMapStateToProps => {
 };
 
 
-export default connect(mapStateToProps, {addApp})(DashboardContainer)
+export default connect(mapStateToProps,)(DashboardContainer)
