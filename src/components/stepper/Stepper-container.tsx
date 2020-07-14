@@ -10,15 +10,16 @@ import AppImage from "./steps/appImage/app-image";
 import AppDescription from "./steps/description/app-desription";
 import AppFeatures from "./steps/features/app-features";
 import AppPreview from "./steps/preview/App-preview";
-import {Color} from "csstype";
-import {ColorChangeHandler, HSLColor, RGBColor} from "react-color";
 import {connect} from "react-redux";
 import {AppStateType} from "../../strore/redux-store";
 import {addApp} from "../../strore/dashboard/dashboard-reducer";
-
+import {IApp} from "../../strore/dashboard/types";
+// @ts-ignore
+import styles from './StepperContainer.module.scss'
 interface Iprops {
-    addApp:(appName: string, images: Array<File>, ImageUrl: Array<String>, description: string,
-            isMapChecked: boolean, isCategoryChecked: boolean, color: any, location: string)=>void
+   addApp:(appName: string,  ImageUrl: Array<string>, description: string,
+           isMapChecked: boolean, isCategoryChecked: boolean, color: any, location: string)=>void
+    app: IApp
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -37,7 +38,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 function getSteps() {
-    return ['Welcome', 'Branding', 'Info', 'Features', 'Preview'];
+    return ['Select master blaster campaign settings', 'Create an ad group', 'Create an ad', 'Features', 'Editor'];
 }
 
 
@@ -61,17 +62,19 @@ let StepperContainer: React.FC<Iprops> = (props) => {
         setAppImage(Files);
         setUrl(Url);
     };
-    let [appName, setAppName] = React.useState<string>(' ');
+    let [appName, setAppName] = React.useState<string>(props.app.name);
     let [images, setAppImage] = React.useState<Array<File>>([]);
-    let [url, setUrl] = React.useState<Array<string>>([]);
-    let [description, setAppdescription] = React.useState<string>(' ');
+    let [url, setUrl] = React.useState<Array<string>>(props.app.imageUrl);
+    let [description, setAppdescription] = React.useState<string>(props.app.description);
     let [isError, setIsError] = React.useState<boolean>(false);
-    let [isMapChecked, setIsMapChecked] = React.useState<boolean>(false);
-    let [isCategoryChecked, setIsCategoryChecked] = React.useState<boolean>(false);
-    let [color, setColor] = React.useState<any>('');
-    let [location, setLocation] = React.useState<string>('');
-    let finishHandler =()=>{props.addApp(appName, images , url, description, isMapChecked,  isCategoryChecked,color, location);
-    handleNext();
+    let [isMapChecked, setIsMapChecked] = React.useState<boolean>(props.app.isMapChecked);
+    let [isCategoryChecked, setIsCategoryChecked] = React.useState<boolean>(props.app.isCategoryChecked);
+    let [color, setColor] = React.useState<any>(props.app.color);
+    let [location, setLocation] = React.useState<string>(props.app.location);
+    let finishHandler = () => {
+        props.addApp(appName, url, description,
+            isMapChecked, isCategoryChecked, color, location);
+        handleNext();
     };
 
 
@@ -135,7 +138,7 @@ let StepperContainer: React.FC<Iprops> = (props) => {
                 ) : (
                     <div>
                         <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
-                        <div>
+                        <div className={styles.buttonsWrapper}>
                             <Button
                                 disabled={activeStep === 0}
                                 onClick={handleBack}
@@ -157,8 +160,6 @@ let StepperContainer: React.FC<Iprops> = (props) => {
                                     )
 
 
-
-
                                 }
                             </div>
                         </div>
@@ -168,8 +169,10 @@ let StepperContainer: React.FC<Iprops> = (props) => {
         </div>
     )
 };
-let mapStateToProps=(state:AppStateType)=>{
-    return{}
+let mapStateToProps = (state: AppStateType) => {
+    return {
+        app: state.dashboardPage.currentEditApp
+    }
 
-}
-export default connect( mapStateToProps, {addApp})(StepperContainer)
+};
+export default connect(mapStateToProps, {addApp})(StepperContainer)

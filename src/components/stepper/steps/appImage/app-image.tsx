@@ -3,7 +3,7 @@ import ImageUploader from "react-images-upload";
 // @ts-ignore
 import classes from './AppImage.module.scss';
 // @ts-ignore
-import {ColorChangeHandler, HSLColor, RGBColor, SketchPicker} from 'react-color';
+import {SketchPicker} from 'react-color';
 
 interface IProps {
     setAppImage: (file: Array<File>, image: string[]) => void
@@ -11,7 +11,6 @@ interface IProps {
     color: any
     setColor: (color: any) => void
 }
-
 
 let AppImage: React.FC<IProps> = (props) => {
 

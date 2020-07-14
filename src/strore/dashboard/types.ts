@@ -5,8 +5,7 @@ import {dashboardActions} from "./actions";
 export interface IApp {
     addId?: number
     name: string
-    images:Array<File>
-    imageUrl:Array<String>
+    imageUrl:Array<string>
     description:string
     isMapChecked:boolean
     isCategoryChecked:boolean

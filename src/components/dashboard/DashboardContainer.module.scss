@@ -1,15 +1,20 @@
-.apps{
+.dashboardWrapper{
   display: flex;
   justify-content: center;
   align-content: center;
   width: 100%;
   max-width: 1335px;
   margin: 0 auto;
+  flex-direction: column;
 }
 .dashboardTools{
   display: flex;
   justify-content: space-between;
   width: 100%;
+}
+.appsWrapper{
+  margin-top: 40px;
+
 }
 
 

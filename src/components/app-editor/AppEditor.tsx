@@ -1,32 +1,27 @@
-import React, {useEffect, useState} from 'react';
-import Modal, {ModalProps} from '@material-ui/core/Modal';
+import React from 'react'
 // @ts-ignore
 import classes from './appEditor.module.scss'
+import Modal from "@material-ui/core/Modal";
 import StepperContainer from "../stepper/Stepper-container";
+import {IApp} from "../../strore/dashboard/types";
 interface Iprops {
     isOpened: boolean
     onClose: () => void
+    app:IApp
 }
 
 const AppEditor: React.FC<Iprops> = (props) => {
-    // let [open ,setIsOpen] = useState(props.isOpened);
-    //    useEffect(()=>{
-    //        setIsOpen(true)
-    //        }
-    //    ,[props.isOpened]);
-    //     console.log(open);
-
     return (
         <div >
-        <Modal className={classes.modalWindowWrapper}
-            open={props.isOpened}
-            onClose={()=>{props.onClose()}}>
+            <Modal className={classes.modalWindowWrapper}
+        open={props.isOpened}
+        onClose={()=>{props.onClose()}}>
             <div className={classes.modalWindowContentWrapper}>
-                <StepperContainer/>
+                    Edit your app
+
             </div>
         </Modal>
-        </div>
-    );
+        </div>);
 };
 
 export default AppEditor;
