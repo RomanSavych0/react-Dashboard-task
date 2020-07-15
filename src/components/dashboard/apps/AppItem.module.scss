@@ -3,13 +3,13 @@
     width: 100px;
     height: 100px;
     padding: 10px;
+    border-radius: 21px;
+    object-fit:cover;
   }
-
   display: flex;
   justify-content: space-around;
-  border: 1px solid black;
+  //border: 1px solid black;
   margin-top: 20px;
-
 }
 
 .item {

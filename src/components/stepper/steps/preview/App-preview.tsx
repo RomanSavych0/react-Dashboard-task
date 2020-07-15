@@ -15,9 +15,8 @@ let AppPreview: React.FC<Iprops> = (props) => {
     return (
         <div className={classes.Preview}>
             <img src={props.picture[0]} alt="app"/>
-            {console.log(props.color.hex)}
             <p>
-                Accent: <span style={{color: props.color.hex}}>{props.color.hex}</span>
+                {/*Accent: <span style={{color: props.color.hex}}>{props.color.hex}</span>*/}
             </p>
 
             <p>App name: {props.appName}</p>

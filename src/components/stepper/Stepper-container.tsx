@@ -12,14 +12,18 @@ import AppFeatures from "./steps/features/app-features";
 import AppPreview from "./steps/preview/App-preview";
 import {connect} from "react-redux";
 import {AppStateType} from "../../strore/redux-store";
-import {addApp} from "../../strore/dashboard/dashboard-reducer";
+import {addAppThunk, removeApp, removeAppThunk, setEditApp} from "../../strore/dashboard/dashboard-reducer";
 import {IApp} from "../../strore/dashboard/types";
 // @ts-ignore
 import styles from './StepperContainer.module.scss'
+
 interface Iprops {
-   addApp:(appName: string,  ImageUrl: Array<string>, description: string,
-           isMapChecked: boolean, isCategoryChecked: boolean, color: any, location: string)=>void
+    addAppThunk: (userName: string | null, appName: string, ImageUrl: Array<string>, description: string,
+                  isMapChecked: boolean, isCategoryChecked: boolean, color: any, location: string) => void
     app: IApp
+    removeAppThunk: (name: string|null, app: IApp) => void
+    setEditApp: (app: IApp) => void
+    userName: string | null
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -72,8 +76,14 @@ let StepperContainer: React.FC<Iprops> = (props) => {
     let [color, setColor] = React.useState<any>(props.app.color);
     let [location, setLocation] = React.useState<string>(props.app.location);
     let finishHandler = () => {
-        props.addApp(appName, url, description,
+        props.removeAppThunk(props.userName,props.app);
+        props.addAppThunk(props.userName, appName, url, description,
             isMapChecked, isCategoryChecked, color, location);
+        //
+        props.setEditApp({
+            name: ' ', imageUrl: [' '], location: '', description: '',
+            color: {}, isCategoryChecked: false, isMapChecked: false,
+        });
         handleNext();
     };
 
@@ -171,8 +181,9 @@ let StepperContainer: React.FC<Iprops> = (props) => {
 };
 let mapStateToProps = (state: AppStateType) => {
     return {
-        app: state.dashboardPage.currentEditApp
+        app: state.dashboardPage.currentEditApp,
+        userName: state.auth.login
     }
 
 };
-export default connect(mapStateToProps, {addApp})(StepperContainer)
+export default connect(mapStateToProps, {addAppThunk, removeAppThunk, setEditApp})(StepperContainer)

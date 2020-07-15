@@ -2,11 +2,12 @@ import {applyMiddleware, combineReducers, compose, createStore} from "redux";
 import {reducer as formReducer} from 'redux-form'
 import thunkMiddleware  from "redux-thunk"
 import dashboardReducer from "./dashboard/dashboard-reducer";
+import authReducer from "./auth/auth-reducer";
 let rootReducer = combineReducers(
     {
         form:formReducer,
         dashboardPage:dashboardReducer,
-
+        auth:authReducer
     }
 );
 type RootReducerType = typeof rootReducer;

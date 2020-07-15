@@ -2,31 +2,65 @@ import React from 'react'
 import {connect} from "react-redux";
 import {AppStateType} from "../../strore/redux-store";
 import {IApp} from "../../strore/dashboard/types";
-import {addApp, closeEditor, openEditor} from "../../strore/dashboard/dashboard-reducer";
+import {closeEditor, openEditor, setAppsThunk, setEditApp} from "../../strore/dashboard/dashboard-reducer";
 // @ts-ignore
 import classes from "./DashboardContainer.module.scss"
 import {ModalProps, Paper} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import AppCreator from "../app-editor/AppCreator";
 import Apps from "./apps/Apps";
+import {Redirect} from "react-router";
 
 interface IMapStateToProps {
     apps: Array<IApp>
-    isEditorOpen:boolean
-
+    isEditorOpen: boolean
+    userName: string | null
+    isUserAuth: boolean
 }
 
 interface IMapDispatchToProps {
-closeEditor:()=>void
-openEditor:()=>void
+    closeEditor: () => void
+    openEditor: () => void
+    setEditApp: (app: IApp) => void
+    setAppsThunk: (url: string | null) => void
 }
 
-
+interface StateType {
+    apps: Array<IApp>
+}
 
 type PropsType = IMapStateToProps & IMapDispatchToProps;
 
-class DashboardContainer extends React.Component<PropsType> {
+class DashboardContainer extends React.Component<PropsType, StateType> {
+    state = {
+        apps: this.props.apps
+
+    };
+
+
+    componentDidUpdate(prevProps: PropsType, prevState: StateType) {
+        console.log("component update");
+        if (prevProps.apps !== this.props.apps) {
+            this.props.setAppsThunk(this.props.userName);
+            this.setState({
+                apps: this.props.apps
+            });
+        }
+
+    }
+
+    componentDidMount(): void {
+        console.log("component did mount");
+        if (this.props.isUserAuth) {
+            this.props.setAppsThunk(this.props.userName);
+        }
+    }
+
+
     render() {
+        if (!this.props.isUserAuth) {
+            return <Redirect to={'/login'}/>
+        }
         return (<div>
                 <div className={classes.dashboardWrapper}>
                     <div className={classes.dashboardTools}>
@@ -43,12 +77,14 @@ class DashboardContainer extends React.Component<PropsType> {
 
                     </div>
                     <AppCreator isOpened={this.props.isEditorOpen} onClose={this.props.closeEditor}/>
-                    <Paper elevation={2} className={classes.appsWrapper}>
-                        <Apps apps={this.props.apps}
+                    <div className={classes.appsWrapper}>
+                        <Apps apps={this.state.apps}
                               isOpened={this.props.openEditor}
                               isClosed={this.props.closeEditor}
+                              setApp={this.props.setEditApp}
+
                         />
-                    </Paper>
+                    </div>
                 </div>
 
             </div>
@@ -59,9 +95,13 @@ class DashboardContainer extends React.Component<PropsType> {
 }
 
 let mapStateToProps = (state: AppStateType): IMapStateToProps => {
-    return {apps: state.dashboardPage.apps ,
-        isEditorOpen :state.dashboardPage.isEditorOpened}
+    return {
+        apps: state.dashboardPage.apps,
+        isEditorOpen: state.dashboardPage.isEditorOpened,
+        userName: state.auth.login,
+        isUserAuth: state.auth.isAuth
+    }
 };
 
 
-export default connect(mapStateToProps,{openEditor, closeEditor})(DashboardContainer)
+export default connect(mapStateToProps, {openEditor, closeEditor, setEditApp, setAppsThunk})(DashboardContainer)

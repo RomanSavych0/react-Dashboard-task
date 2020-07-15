@@ -16,4 +16,4 @@ export interface IApp {
 export type DashboardActionTypes = InfrerActionsTypes<typeof dashboardActions>;
 
 export type DashboardItitialState = typeof initialState;
-export type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, DashboardActionTypes>
+export type DashBoardThunkType = ThunkAction<Promise<void>, AppStateType, unknown, DashboardActionTypes>

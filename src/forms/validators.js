@@ -14,3 +14,8 @@ const tooOld = value =>
 export const aol = value =>
     value && /.+@aol\.com/.test(value) ?
         'Really? You still use AOL for your email?' : undefined
+
+
+export let replaceEmailToURL=(string)=>{
+    return string.replace('@' , '').replace('.' , '')
+};
