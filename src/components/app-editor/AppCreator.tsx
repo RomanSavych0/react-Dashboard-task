@@ -1,6 +1,5 @@
 import React from 'react';
 import Modal  from '@material-ui/core/Modal';
-// @ts-ignore
 import classes from './appEditor.module.scss'
 import StepperContainer from "../stepper/StepperContainer";
 interface Iprops {

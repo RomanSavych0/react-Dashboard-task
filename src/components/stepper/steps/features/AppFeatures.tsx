@@ -1,11 +1,8 @@
 import React from 'react';
-// @ts-ignore
 import classes from './AppFeatures.module.scss';
 import {Switch} from "@material-ui/core";
 
-// @ts-ignore
 import categoriesImg from '../../../../asserts/images/categories.jpg'
-// @ts-ignore
 import mapImg from '../../../../asserts/images/map.png'
 
 

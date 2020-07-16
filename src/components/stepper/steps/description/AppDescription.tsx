@@ -1,5 +1,4 @@
 import React from 'react'
-// @ts-ignore
 import classes from './AppDescription.module.scss'
 import {TextField} from "@material-ui/core";
 import GoogleMapReact from 'google-map-react';
@@ -21,7 +20,7 @@ interface IProps {
 
 
 
-let AppDescription: React.FC<IProps> = (props) => {
+const AppDescription: React.FC<IProps> = (props) => {
 
 
 

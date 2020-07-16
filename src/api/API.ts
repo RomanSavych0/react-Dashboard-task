@@ -7,22 +7,24 @@ firebaseApp.database();
 const instance = axios.create({
     baseURL: 'https://dashboard-content-editor.firebaseio.com/'
 });
-export let addAppAPI = async (userName: string | null, app: IApp) => {
+
+
+export const addAppAPI =  (userName: string | null, app: IApp):Promise<AxiosResponse> => {
     if (userName === null)
         userName = '';
     let url = replaceEmailToURL(userName);
-    return await instance.post(`${url}apps.json`, app);
+    return  instance.post(`${url}apps.json`, app);
 
 };
 
-export let getDataAPI = async (userName: string | null) => {
+export const getDataAPI =  (userName: string | null):Promise<AxiosResponse> => {
     if (userName === null)
         userName = '';
     let url = replaceEmailToURL(userName);
     return instance.get(`${url}apps.json`);
 };
 
-export let removeAppAPI = async (userName: string | null, app: IApp) => {
+export const removeAppAPI = async (userName: string | null, app: IApp) => {
     if (userName === null)
         userName = '';
     let url = replaceEmailToURL(userName);
@@ -50,13 +52,13 @@ export let removeAppAPI = async (userName: string | null, app: IApp) => {
 
 
 };
-export const authMeAPI = (userEmail: string, userPassword: string) => {
+export const authMeAPI = (userEmail: string, userPassword: string):Promise<any> => {
     return firebaseApp.auth().signInWithEmailAndPassword(userEmail, userPassword);
 };
-export const registerAPI = (userEmail: string, userPassword: string) => {
+export const registerAPI = (userEmail: string, userPassword: string):Promise<any> => {
     return firebaseApp.auth().createUserWithEmailAndPassword(userEmail, userPassword);
 };
 
-export const signOutAPI = () => {
+export const signOutAPI = ():Promise<any> => {
     return firebaseApp.auth().signOut();
 };

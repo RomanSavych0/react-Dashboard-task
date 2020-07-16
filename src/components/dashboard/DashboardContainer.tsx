@@ -30,7 +30,7 @@ interface StateType {
 
 type PropsType = IMapStateToProps & IMapDispatchToProps;
 
-class DashboardContainer extends React.Component<PropsType, StateType> {
+class DashboardContainer extends React.PureComponent<PropsType, StateType> {
     state = {
         apps: this.props.apps
 

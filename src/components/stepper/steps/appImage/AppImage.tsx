@@ -1,8 +1,6 @@
 import React from 'react'
 import ImageUploader from "react-images-upload";
-// @ts-ignore
 import classes from './AppImage.module.scss';
-// @ts-ignore
 import {SketchPicker} from 'react-color';
 
 interface IProps {
@@ -12,7 +10,7 @@ interface IProps {
     setColor: (color: any) => void
 }
 
-let AppImage: React.FC<IProps> = (props) => {
+const AppImage: React.FC<IProps> = (props) => {
 
     return (
         <div className={[classes.AppImage, classes.twoColumn].join(' ')}>

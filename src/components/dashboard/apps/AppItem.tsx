@@ -1,10 +1,8 @@
 import React from 'react'
 import {IApp} from "../../../strore/dashboard/types";
-// @ts-ignore
 import classes from './AppItem.module.scss'
 import Button from '@material-ui/core/Button';
 import {Paper} from '@material-ui/core';
-// @ts-ignore
 import appDefaultImage from '../../../asserts/images/default-image.png'
 
 interface Iprops {
@@ -15,7 +13,7 @@ interface Iprops {
 
 }
 
-let AppItem: React.FC<Iprops> = (props) => {
+const AppItem: React.FC<Iprops> = (props) => {
 
     return (<Paper className={classes.appWrapper}>
             <div className={classes.item}>

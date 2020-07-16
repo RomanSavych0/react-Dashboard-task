@@ -14,7 +14,6 @@ import {connect} from "react-redux";
 import {AppStateType} from "../../strore/redux-store";
 import {addAppThunk, removeAppThunk, setEditApp} from "../../strore/dashboard/dashboard-reducer";
 import {IApp} from "../../strore/dashboard/types";
-// @ts-ignore
 import styles from './StepperContainer.module.scss'
 
 interface Iprops {
@@ -47,7 +46,7 @@ function getSteps() {
 }
 
 
-let isErrorHandler = (value: string, maxLenght: number) => {
+const isErrorHandler = (value: string, maxLenght: number) => {
     if (value.length > maxLenght) {
         return true
     } else {
@@ -66,16 +65,16 @@ let StepperContainer: React.FC<Iprops> = (props) => {
     let [color, setColor] = React.useState<any>(props.app.color);
     let [location, setLocation] = React.useState<string>(props.app.location);
 
-    let setAppNameWithValidator = (name: string) => {
+    const setAppNameWithValidator = (name: string) => {
         setAppName(name);
         let isErr: boolean = isErrorHandler(appName, 30);
         setIsError(isErr);
     };
-    let onDropImage = (Files: any, Url: any) => {
+    const onDropImage = (Files: any, Url: any) => {
         setUrl(Url);
     };
 
-    let finishHandler = () => {
+    const finishHandler = () => {
         props.removeAppThunk(props.userName, props.app);
         props.addAppThunk(props.userName, appName, url, description,
             isMapChecked, isCategoryChecked, color, location);

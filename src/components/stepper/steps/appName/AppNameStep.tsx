@@ -1,6 +1,5 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
-// @ts-ignore
 import classes from './AppName.module.scss';
 
 interface IProps {
@@ -10,7 +9,7 @@ interface IProps {
 }
 
 
-let AppName: React.FC<IProps> = (props) => {
+const AppName: React.FC<IProps> = (props) => {
 
 
     return (<div className={classes.Welcome}>

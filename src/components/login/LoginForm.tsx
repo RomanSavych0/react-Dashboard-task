@@ -2,7 +2,6 @@ import React from "react";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {renderField} from "../../forms/formsControll";
 import {aol, email, minValue6} from "../../forms/validators";
-// @ts-ignore
 import styles from "./Login.module.scss";
 import {Button} from "@material-ui/core";
 import makeStyles from "@material-ui/core/styles/makeStyles";
@@ -57,7 +56,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-let LoginForm: React.FC<InjectedFormProps<IFormData, IProps> & IProps> = (
+const LoginForm: React.FC<InjectedFormProps<IFormData, IProps> & IProps> = (
     props
 ) => {
     const onSubmit = (formData: IFormData) => {

@@ -3,10 +3,11 @@ import {authMeAPI, registerAPI, signOutAPI} from "../../api/API";
 import {authActions} from "./actions";
 import {toast} from "react-toastify";
 
-export let initialState = {
+export const initialState = {
     isAuth: false as boolean,
     login: null as string | null,
 };
+
 const authReducer = (state = initialState, action: authActionsTypes): authInitialStateType => {
     switch (action.type) {
         case "SET_USER_DATA":
@@ -18,7 +19,7 @@ const authReducer = (state = initialState, action: authActionsTypes): authInitia
     }
 };
 
-export let login = (email: string, pasword: string): AuthThunkType => {
+export const login = (email: string, pasword: string): AuthThunkType => {
     return async (dispatch) => {
         authMeAPI(email, pasword).then(
             response => {
@@ -30,10 +31,10 @@ export let login = (email: string, pasword: string): AuthThunkType => {
     }
 };
 
-export let register = (email: string, pasword: string): AuthThunkType => {
+export const register = (email: string, pasword: string): AuthThunkType => {
     return async (dispatch) => {
         registerAPI(email, pasword).then(
-            response => {
+            response   => {
                 toast.success('Account has been created success');
                 // dispatch(authActions.authAC(email, false))
             }
@@ -41,7 +42,7 @@ export let register = (email: string, pasword: string): AuthThunkType => {
     }
 };
 
-export let signOut = (): AuthThunkType => {
+export const signOut = (): AuthThunkType => {
     return async (dispatch) => {
         signOutAPI().then(
             response => {

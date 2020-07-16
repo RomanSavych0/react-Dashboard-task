@@ -1,5 +1,4 @@
 import React from 'react';
-// @ts-ignore
 import classes from './AppPreview.module.scss';
 
 interface Iprops {
@@ -11,7 +10,7 @@ interface Iprops {
     ismapChecked: boolean
 }
 
-let AppPreview: React.FC<Iprops> = (props) => {
+const AppPreview: React.FC<Iprops> = (props) => {
    let color;
     if(props.color ===undefined) {
         color = "#fff"

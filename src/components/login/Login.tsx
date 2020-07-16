@@ -1,7 +1,6 @@
 import React from "react";
 import {Redirect} from "react-router-dom";
 import {connect} from "react-redux";
-// @ts-ignore
 import styles from "./Login.module.scss";
 import {login, register} from "../../strore/auth/auth-reducer";
 import {AppStateType} from "../../strore/redux-store";
@@ -26,7 +25,7 @@ const Login: React.FC<IProps> = (props) => {
         </div>
     );
 };
-let mapStateToProps = (state: AppStateType) => {
+const mapStateToProps = (state: AppStateType) => {
     return {
         isAuthorized: state.auth.isAuth,
     };

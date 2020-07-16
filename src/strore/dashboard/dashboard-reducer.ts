@@ -44,7 +44,7 @@ const dashboardReducer = (state = initialState, action: DashboardActionTypes): D
         case 'SET-KEYS':
             return {
                 ...state, keys: action.keys
-            }
+            };
 
         default:
             return state;
@@ -53,7 +53,7 @@ const dashboardReducer = (state = initialState, action: DashboardActionTypes): D
 
 
 
-export let addAppThunk = (userName: string | null, appName: string, ImageUrl: Array<string>,
+export const addAppThunk = (userName: string | null, appName: string, ImageUrl: Array<string>,
                           description: string, isMapChecked: boolean,
                           isCategoryChecked: boolean, color: any, location: string): DashBoardThunkType => {
     let app = {
@@ -70,7 +70,7 @@ export let addAppThunk = (userName: string | null, appName: string, ImageUrl: Ar
         ).catch(error => alert(error));
     }
 };
-export let setAppsThunk = (URL: string | null): DashBoardThunkType => {
+export const setAppsThunk = (URL: string | null): DashBoardThunkType => {
 
     return async (dispatch) => {
         getDataAPI(URL).then(response => {
@@ -85,24 +85,24 @@ export let setAppsThunk = (URL: string | null): DashBoardThunkType => {
     };
 };
 
-export let openEditor = () => {
+export const openEditor = () => {
     return (dispatch: Dispatch) => {
         dispatch(dashboardActions.openEditorAC())
     }
 
 };
-export let closeEditor = () => {
+export const closeEditor = () => {
     return (dispatch: Dispatch) => {
         dispatch(dashboardActions.closeEditorAC())
     }
 };
-export let setEditApp = (app: IApp) => {
+export const setEditApp = (app: IApp) => {
     return (dispatch: Dispatch) => {
         dispatch(dashboardActions.setCurrentEditApp(app))
     }
 };
 
-export let removeAppThunk = (URL: string | null, app: IApp):DashBoardThunkType => {
+export const removeAppThunk = (URL: string | null, app: IApp):DashBoardThunkType => {
     return async (dispatch) => {
         removeAppAPI(URL, app).then(response => {
             dispatch(dashboardActions.removeAppAC(app));
