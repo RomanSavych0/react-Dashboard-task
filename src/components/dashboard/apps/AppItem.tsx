@@ -3,10 +3,10 @@ import {IApp} from "../../../strore/dashboard/types";
 // @ts-ignore
 import classes from './AppItem.module.scss'
 import Button from '@material-ui/core/Button';
-import AppEditor from "../../app-editor/AppEditor";
 import {Paper} from '@material-ui/core';
 // @ts-ignore
 import appDefaultImage from '../../../asserts/images/default-image.png'
+
 interface Iprops {
     app: IApp
     closeEditor: () => void
@@ -21,7 +21,10 @@ let AppItem: React.FC<Iprops> = (props) => {
             <div className={classes.item}>
                 {
 
-                    <img src={`${props.app.imageUrl[0]===' '?(appDefaultImage):(props.app.imageUrl[0])}`} alt="app"/>
+                    <img src={`${props.app.imageUrl[0] === ' ' ?
+                        (appDefaultImage) : 
+                        (props.app.imageUrl[0])}`}
+                         alt="app"/>
                 }
             </div>
             <div className={classes.item}><h4>{props.app.name}</h4></div>

@@ -12,11 +12,20 @@ interface Iprops {
 }
 
 let AppPreview: React.FC<Iprops> = (props) => {
+   let color;
+    if(props.color ===undefined) {
+        color = "#fff"
+    }else {
+        color = props.color.hex
+    }
+
+
     return (
         <div className={classes.Preview}>
             <img src={props.picture[0]} alt="app"/>
             <p>
-                {/*Accent: <span style={{color: props.color.hex}}>{props.color.hex}</span>*/}
+
+                Accent: <span style={{color: color}}>{color}</span>
             </p>
 
             <p>App name: {props.appName}</p>

@@ -1,7 +1,7 @@
 import React from 'react';
 // @ts-ignore
 import styles from  './App.scss';
-import DashboardContainer from "./components/dashboard/Dashboard-container";
+import DashboardContainer from "./components/dashboard/DashboardContainer";
 import Header from "./components/header/Header";
 import {Redirect, Route} from "react-router";
 import Login from "./components/login/Login";

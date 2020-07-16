@@ -5,12 +5,11 @@ import {IApp} from "../../strore/dashboard/types";
 import {closeEditor, openEditor, setAppsThunk, setEditApp} from "../../strore/dashboard/dashboard-reducer";
 // @ts-ignore
 import classes from "./DashboardContainer.module.scss"
-import {ModalProps, Paper} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import AppCreator from "../app-editor/AppCreator";
 import Apps from "./apps/Apps";
 import {Redirect} from "react-router";
-// or
+
 interface IMapStateToProps {
     apps: Array<IApp>
     isEditorOpen: boolean
@@ -37,10 +36,8 @@ class DashboardContainer extends React.Component<PropsType, StateType> {
 
     };
 
-
     componentDidUpdate(prevProps: PropsType, prevState: StateType) {
         if ((this.props.apps.length !== this.state.apps.length)) {
-            console.log('update');
             this.props.setAppsThunk(this.props.userName);
             this.setState({
                 apps: this.props.apps
@@ -61,7 +58,6 @@ class DashboardContainer extends React.Component<PropsType, StateType> {
             return <Redirect to={'/login'}/>
 
         }
-        console.log("component did update");
 
         return (<div>
                 <div className={classes.dashboardWrapper}>
@@ -79,26 +75,21 @@ class DashboardContainer extends React.Component<PropsType, StateType> {
 
                     </div>
                     <AppCreator isOpened={this.props.isEditorOpen} onClose={this.props.closeEditor}/>
-
                     Apps:
-
                     <div className={classes.appsWrapper}>
-                        {(this.state.apps.length===0)?(<div className={classes.appInfoText}>
-                            <h2>
-                                your application list is empty</h2>
-                        </div>):(<Apps apps={this.state.apps}
-                                                                                 isOpened={this.props.openEditor}
-                                                                                 isClosed={this.props.closeEditor}
-                                                                                 setApp={this.props.setEditApp}
+                        {(this.state.apps.length === 0) ?
+                            (<div className={classes.appInfoText}>
+                            <h2>your application list is empty</h2>
+                             </div>)
+                            :
+                            (<Apps apps={this.state.apps}
+                                   isOpened={this.props.openEditor}
+                                         isClosed={this.props.closeEditor}
+                                         setApp={this.props.setEditApp}
 
                         />)}
-
-
                     </div>
-
-
                 </div>
-
             </div>
         )
     }

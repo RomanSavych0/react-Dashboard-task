@@ -1,10 +1,8 @@
 import {DashboardActionTypes, DashboardItitialState, DashBoardThunkType, IApp} from "./types";
-import {ThunkDispatch} from "redux-thunk";
 import {addObjintoArray, removeObjectFromArray} from "../../utils/object-helper";
 import {dashboardActions} from "./actions";
 import {Dispatch} from "redux";
-import {addAppAPI, authMeAPI, getDataAPI, removeAppAPI} from "../../api/API";
-import {authActions} from "../auth/actions";
+import {addAppAPI,  getDataAPI, removeAppAPI} from "../../api/API";
 
 export let initialState = {
     apps: [] as Array<IApp>,
@@ -14,9 +12,8 @@ export let initialState = {
         name: ' ', imageUrl: [' '], location: '', description: '',
         color: {}, isCategoryChecked: false, isMapChecked: false,
     } as IApp,
-
-
 };
+
 const dashboardReducer = (state = initialState, action: DashboardActionTypes): DashboardItitialState => {
     switch (action.type) {
         case "SET-APPS":
@@ -52,20 +49,9 @@ const dashboardReducer = (state = initialState, action: DashboardActionTypes): D
         default:
             return state;
     }
-    ;
 };
 
 
-// export let addApp = (appName: string, ImageUrl: Array<string>, description: string,
-//                      isMapChecked: boolean, isCategoryChecked: boolean, color: any, location: string) => {
-//     let app = {
-//         name: appName, imageUrl: ImageUrl, description: description,
-//         isMapChecked: isMapChecked, isCategoryChecked: isCategoryChecked, color: color, location: location
-//     };
-//     return (dispatch: Dispatch) => {
-//         dispatch(dashboardActions.addAppAC(app))
-//     }
-// };
 
 export let addAppThunk = (userName: string | null, appName: string, ImageUrl: Array<string>,
                           description: string, isMapChecked: boolean,
@@ -82,29 +68,21 @@ export let addAppThunk = (userName: string | null, appName: string, ImageUrl: Ar
                 dispatch(dashboardActions.addAppAC(app))
             }
         ).catch(error => alert(error));
-
-
     }
 };
 export let setAppsThunk = (URL: string | null): DashBoardThunkType => {
 
     return async (dispatch) => {
         getDataAPI(URL).then(response => {
-
             let data = Object.values(response.data);
             let appsArray = [];
-
-
             for (let item of data) {
                 appsArray.push(item)
             }
             // @ts-ignore
             dispatch(dashboardActions.setAppsAC(appsArray))
         }).catch(error => dispatch(dashboardActions.setAppsAC([])));
-
-
     };
-
 };
 
 export let openEditor = () => {
@@ -121,11 +99,6 @@ export let closeEditor = () => {
 export let setEditApp = (app: IApp) => {
     return (dispatch: Dispatch) => {
         dispatch(dashboardActions.setCurrentEditApp(app))
-    }
-};
-export let removeApp = (app: IApp) => {
-    return (dispatch: Dispatch) => {
-        dispatch(dashboardActions.removeAppAC(app))
     }
 };
 

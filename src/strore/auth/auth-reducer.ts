@@ -1,4 +1,3 @@
-import dashboardReducer from "../dashboard/dashboard-reducer";
 import {authActionsTypes, authInitialStateType, AuthThunkType} from "./types";
 import {authMeAPI, registerAPI, signOutAPI} from "../../api/API";
 import {authActions} from "./actions";
@@ -29,9 +28,8 @@ export let login = (email: string, pasword: string): AuthThunkType => {
 
 
     }
-
-
 };
+
 export let register = (email: string, pasword: string): AuthThunkType => {
     return async (dispatch) => {
         registerAPI(email, pasword).then(
@@ -40,12 +38,9 @@ export let register = (email: string, pasword: string): AuthThunkType => {
                 // dispatch(authActions.authAC(email, false))
             }
         ).catch(error => toast.error(error.toString()));
-
-
     }
-
-
 };
+
 export let signOut = (): AuthThunkType => {
     return async (dispatch) => {
         signOutAPI().then(
@@ -53,11 +48,7 @@ export let signOut = (): AuthThunkType => {
                 dispatch(authActions.signOutAC())
             }
         ).catch(error => toast.error(error.toString()));
-
-
     }
-
-
 };
 
 

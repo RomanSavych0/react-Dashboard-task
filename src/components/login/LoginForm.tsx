@@ -1,18 +1,17 @@
 import React from "react";
-import { Field, InjectedFormProps, reduxForm } from "redux-form";
-import { renderField } from "../../forms/formsControll";
-import {aol, email, maxLength15, minValue6} from "../../forms/validators";
+import {Field, InjectedFormProps, reduxForm} from "redux-form";
+import {renderField} from "../../forms/formsControll";
+import {aol, email, minValue6} from "../../forms/validators";
 // @ts-ignore
 import styles from "./Login.module.scss";
-import { Button } from "@material-ui/core";
+import {Button} from "@material-ui/core";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import Link from "@material-ui/core/Link";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import Avatar from "material-ui/Avatar";
 import Box from "@material-ui/core/Box";
-// import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+
 
 interface IFormData {
     email: string;
@@ -23,6 +22,7 @@ interface IProps {
     login: (email: string, password: string) => void;
     register: (email: string, password: string) => void;
 }
+
 function Copyright() {
     return (
         <Typography variant="body2" color="textSecondary" align="center">
@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: theme.palette.secondary.main,
     },
     form: {
-        width: '100%', // Fix IE 11 issue.
+        width: '100%',
         marginTop: theme.spacing(1),
     },
     submit: {
@@ -57,76 +57,68 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-
 let LoginForm: React.FC<InjectedFormProps<IFormData, IProps> & IProps> = (
     props
 ) => {
     const onSubmit = (formData: IFormData) => {
-        console.log("submit", formData.email, formData.password);
         props.login(formData.email, formData.password);
     };
     const onRegister = (formData: IFormData) => {
-        props.register(formData.email , formData.password);
+        props.register(formData.email, formData.password);
     };
-
-
     const classes = useStyles();
-
-
     return (
         <Container component="main" maxWidth="xs">
-            <CssBaseline />
+            <CssBaseline/>
             <div className={classes.paper}>
-                {/*<Avatar className={classes.avatar}>*/}
-                {/*    <LockOutlinedIcon />*/}
-                {/*</Avatar>*/}
                 <Typography component="h1" variant="h5">
                     Sign in
                 </Typography>
-        <form className={classes.form}>
-            <Field
-                name="email"
-                type="email"
-                component={renderField}
-                label="Email"
-                validate={email}
-                warn={aol}
-            />
-            <Field
-                name="password"
-                type="password"
-                component={renderField}
-                label="password"
-                validate={minValue6}
-                warn={aol}
-            />
+                <form className={classes.form}>
+                    <Field
+                        name="email"
+                        type="email"
+                        component={renderField}
+                        label="Email"
+                        validate={email}
+                        warn={aol}
+                    />
+                    <Field
+                        name="password"
+                        type="password"
+                        component={renderField}
+                        label="password"
+                        validate={minValue6}
+                        warn={aol}
+                    />
 
-            <div className={styles.LoginButtons}>
-                <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={props.handleSubmit(onSubmit)}
-                >
-                   Sign in
-                </Button>
-                <Button
-                    variant="contained"
-                    color="secondary"
-                    onClick={props.handleSubmit(onRegister)}
-                >
-                    Sign up
-                </Button>
-            </div>
+                    <div className={styles.LoginButtons}>
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            onClick={props.handleSubmit(onSubmit)}
+                        >
+                            Sign in
+                        </Button>
+
+                        <Button
+                            variant="contained"
+                            color="secondary"
+                            onClick={props.handleSubmit(onRegister)}
+                        >
+                            Sign up
+                        </Button>
+
+                    </div>
 
 
-
-        </form>
+                </form>
             </div>
             <Box mt={8}>
-                <Copyright />
+                <Copyright/>
             </Box>
         </Container>
     );
 };
 
-export default reduxForm<IFormData, IProps>({ form: "login" })(LoginForm);
+export default reduxForm<IFormData, IProps>({form: "login"})(LoginForm);

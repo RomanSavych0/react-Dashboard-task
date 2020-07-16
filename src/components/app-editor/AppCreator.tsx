@@ -1,8 +1,8 @@
-import React, {useEffect, useState} from 'react';
-import Modal, {ModalProps} from '@material-ui/core/Modal';
+import React from 'react';
+import Modal  from '@material-ui/core/Modal';
 // @ts-ignore
 import classes from './appEditor.module.scss'
-import StepperContainer from "../stepper/Stepper-container";
+import StepperContainer from "../stepper/StepperContainer";
 interface Iprops {
     isOpened: boolean
     onClose: () => void

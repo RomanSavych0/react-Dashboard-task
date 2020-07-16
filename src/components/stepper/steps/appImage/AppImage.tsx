@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React from 'react'
 import ImageUploader from "react-images-upload";
 // @ts-ignore
 import classes from './AppImage.module.scss';

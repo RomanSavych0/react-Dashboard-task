@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React from 'react'
 // @ts-ignore
 import classes from './AppDescription.module.scss'
 import {TextField} from "@material-ui/core";

@@ -1,11 +1,9 @@
 import axios, {AxiosResponse} from "axios";
 import {firebaseApp} from "../firebase/firebase";
-import * as firebase from "../components/login/Login";
 import {IApp} from "../strore/dashboard/types";
 import {replaceEmailToURL} from "../forms/validators";
 
 firebaseApp.database();
-
 const instance = axios.create({
     baseURL: 'https://dashboard-content-editor.firebaseio.com/'
 });
@@ -29,7 +27,6 @@ export let removeAppAPI = async (userName: string | null, app: IApp) => {
         userName = '';
     let url = replaceEmailToURL(userName);
     instance.get(`${url}apps.json`).then(response => {
-        console.log(response.data);
                 if(response.data !== null) {
                     let itemsKeys = Object.keys(response.data);
                     let itemsValues   = Object.values(response.data);
@@ -59,8 +56,6 @@ export const authMeAPI = (userEmail: string, userPassword: string) => {
 export const registerAPI = (userEmail: string, userPassword: string) => {
     return firebaseApp.auth().createUserWithEmailAndPassword(userEmail, userPassword);
 };
-
-
 
 export const signOutAPI = () => {
     return firebaseApp.auth().signOut();

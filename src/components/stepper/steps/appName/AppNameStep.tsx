@@ -1,8 +1,7 @@
-import React, {useState} from 'react';
+import React from 'react';
 import TextField from '@material-ui/core/TextField';
 // @ts-ignore
 import classes from './AppName.module.scss';
-import {maxLength, maxLength15} from "../../../../forms/validators";
 
 interface IProps {
     value: string

@@ -19,12 +19,10 @@ let Apps: React.FC<IProps> = (props) => {
                         setApp={props.setApp}
         />
     });
-
     return (
         <div className={classes.appsList}>
             {AppsItems}
         </div>
     )
-
 };
 export default Apps;

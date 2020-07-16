@@ -29,10 +29,10 @@ const useStyles = makeStyles((theme) => ({
 
 const Header: React.FC<IProps> = (props) => {
     let [isAuth, setIsAuth] = React.useState<boolean>(props.isAuthorized);
+
     useEffect(() => {
         setIsAuth(props.isAuthorized)
     }, [props.isAuthorized]);
-
 
     const classes = useStyles();
     return (<div className={classes.root}>
@@ -56,14 +56,11 @@ const Header: React.FC<IProps> = (props) => {
                                         Sign out
                                     </Button>
                                 </div>
-
-
-                            ) :
-                            ('Login')
+                            )
+                            :('Login')
                         }
                     </div>
                 </NavLink>
-
             </Toolbar>
         </AppBar>
     </div>)

@@ -6,26 +6,25 @@ import Step from "@material-ui/core/Step/Step";
 import StepLabel from "@material-ui/core/StepLabel/StepLabel";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-import AppImage from "./steps/appImage/app-image";
-import AppDescription from "./steps/description/app-desription";
-import AppFeatures from "./steps/features/app-features";
-import AppPreview from "./steps/preview/App-preview";
+import AppImage from "./steps/appImage/AppImage";
+import AppDescription from "./steps/description/AppDescription";
+import AppFeatures from "./steps/features/AppFeatures";
+import AppPreview from "./steps/preview/AppPreview";
 import {connect} from "react-redux";
 import {AppStateType} from "../../strore/redux-store";
-import {addAppThunk, removeApp, removeAppThunk, setEditApp} from "../../strore/dashboard/dashboard-reducer";
+import {addAppThunk, removeAppThunk, setEditApp} from "../../strore/dashboard/dashboard-reducer";
 import {IApp} from "../../strore/dashboard/types";
 // @ts-ignore
 import styles from './StepperContainer.module.scss'
-import createPalette from "@material-ui/core/styles/createPalette";
 
 interface Iprops {
     addAppThunk: (userName: string | null, appName: string, ImageUrl: Array<string>, description: string,
                   isMapChecked: boolean, isCategoryChecked: boolean, color: any, location: string) => void
     app: IApp
-    removeAppThunk: (name: string|null, app: IApp) => void
+    removeAppThunk: (name: string | null, app: IApp) => void
     setEditApp: (app: IApp) => void
     userName: string | null
-    onClose:()=>void
+    onClose: () => void
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -58,18 +57,7 @@ let isErrorHandler = (value: string, maxLenght: number) => {
 let StepperContainer: React.FC<Iprops> = (props) => {
     const classes = useStyles();
     const [activeStep, setActiveStep] = React.useState(0);
-
-    let setAppNameWithValidator = (name: string) => {
-        setAppName(name);
-        let isErr: boolean = isErrorHandler(appName, 30);
-        setIsError(isErr);
-    };
-    let onDropImage = (Files: any, Url: any) => {
-        setAppImage(Files);
-        setUrl(Url);
-    };
     let [appName, setAppName] = React.useState<string>(props.app.name);
-    let [images, setAppImage] = React.useState<Array<File>>([]);
     let [url, setUrl] = React.useState<Array<string>>(props.app.imageUrl);
     let [description, setAppdescription] = React.useState<string>(props.app.description);
     let [isError, setIsError] = React.useState<boolean>(false);
@@ -77,8 +65,18 @@ let StepperContainer: React.FC<Iprops> = (props) => {
     let [isCategoryChecked, setIsCategoryChecked] = React.useState<boolean>(props.app.isCategoryChecked);
     let [color, setColor] = React.useState<any>(props.app.color);
     let [location, setLocation] = React.useState<string>(props.app.location);
+
+    let setAppNameWithValidator = (name: string) => {
+        setAppName(name);
+        let isErr: boolean = isErrorHandler(appName, 30);
+        setIsError(isErr);
+    };
+    let onDropImage = (Files: any, Url: any) => {
+        setUrl(Url);
+    };
+
     let finishHandler = () => {
-        props.removeAppThunk(props.userName,props.app);
+        props.removeAppThunk(props.userName, props.app);
         props.addAppThunk(props.userName, appName, url, description,
             isMapChecked, isCategoryChecked, color, location);
         //
@@ -121,10 +119,10 @@ let StepperContainer: React.FC<Iprops> = (props) => {
     const steps = getSteps();
 
     const handleNext = () => {
-        if(appName.length !==0) {
+
+        if (appName.trim().length !== 0) {
             setActiveStep((prevActiveStep) => prevActiveStep + 1);
-        }
-        else{
+        } else {
             setIsError(true)
         }
 
@@ -153,9 +151,9 @@ let StepperContainer: React.FC<Iprops> = (props) => {
                         <Typography className={classes.instructions}>All steps completed</Typography>
 
                         <div className={styles.buttonsWrapper}>
-                            <Button  variant="contained" onClick={handleReset}>Reset</Button>
+                            <Button variant="contained" onClick={handleReset}>Reset</Button>
 
-                            <Button  variant="contained" color="primary" onClick={props.onClose}>Close</Button>
+                            <Button variant="contained" color="primary" onClick={props.onClose}>Close</Button>
                         </div>
 
 
