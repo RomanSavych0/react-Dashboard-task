@@ -14,8 +14,14 @@ export const renderField:React.FC<IrenderField>  = ({input, label, type, meta: {
     return (<div>
         <label>{label}</label>
         <div>
-            <TextField error={error} {...input} placeholder={label} type={type} label={error}/>
-            {/*{touched && ((error && <span>{error}</span>) || (warning && <span>{warning}</span>))}*/}
+            <TextField  variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        error={error} {...input} placeholder={label} type={type} label={error}
+                        autoFocus
+                        autoComplete="email"
+            />
         </div>
     </div>)
 };

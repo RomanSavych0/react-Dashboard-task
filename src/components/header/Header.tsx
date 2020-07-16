@@ -1,10 +1,9 @@
-import React, {FC, useEffect} from 'react'
+import React, {useEffect} from 'react'
 import {connect} from "react-redux";
 import {AppStateType} from "../../strore/redux-store";
 import {AppBar} from "@material-ui/core";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import {classes} from "istanbul-lib-coverage";
 import Button from "@material-ui/core/Button";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import {NavLink} from "react-router-dom";
@@ -13,7 +12,7 @@ import {signOut} from "../../strore/auth/auth-reducer";
 interface IProps {
     email: string | null,
     isAuthorized: boolean
-    signOut:()=>void
+    signOut: () => void
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -29,7 +28,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Header: React.FC<IProps> = (props) => {
-    let [email, setEmail] = React.useState<string | null>(props.email);
     let [isAuth, setIsAuth] = React.useState<boolean>(props.isAuthorized);
     useEffect(() => {
         setIsAuth(props.isAuthorized)
@@ -41,13 +39,13 @@ const Header: React.FC<IProps> = (props) => {
         <AppBar position="static">
             <Toolbar>
                 <Typography variant="h6" className={classes.title}>
-                    <NavLink to="/dashboard" style={{color: "white"}}>
+                    <NavLink to="/dashboard" style={{color: "white", textDecoration: "none"}}>
                         <Button color="inherit">
                             Dashboard
                         </Button>
                     </NavLink>
                 </Typography>
-                <NavLink to="/login" style={{color: "white"}}>
+                <NavLink to="/login" style={{color: "white", textDecoration: "none"}}>
                     <div>
                         {isAuth ?
                             (
@@ -72,10 +70,12 @@ const Header: React.FC<IProps> = (props) => {
 };
 
 const mapStateToProps = (state: AppStateType) => {
-    return {email: state.auth.login, isAuthorized: state.auth.isAuth}
+    return {
+        email: state.auth.login,
+        isAuthorized: state.auth.isAuth,
+    }
 
 };
-
 
 
 export default connect(mapStateToProps, {signOut})(Header);

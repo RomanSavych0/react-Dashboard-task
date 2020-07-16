@@ -16,6 +16,7 @@ import {addAppThunk, removeApp, removeAppThunk, setEditApp} from "../../strore/d
 import {IApp} from "../../strore/dashboard/types";
 // @ts-ignore
 import styles from './StepperContainer.module.scss'
+import createPalette from "@material-ui/core/styles/createPalette";
 
 interface Iprops {
     addAppThunk: (userName: string | null, appName: string, ImageUrl: Array<string>, description: string,
@@ -24,6 +25,7 @@ interface Iprops {
     removeAppThunk: (name: string|null, app: IApp) => void
     setEditApp: (app: IApp) => void
     userName: string | null
+    onClose:()=>void
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -119,7 +121,13 @@ let StepperContainer: React.FC<Iprops> = (props) => {
     const steps = getSteps();
 
     const handleNext = () => {
-        setActiveStep((prevActiveStep) => prevActiveStep + 1);
+        if(appName.length !==0) {
+            setActiveStep((prevActiveStep) => prevActiveStep + 1);
+        }
+        else{
+            setIsError(true)
+        }
+
     };
 
     const handleBack = () => {
@@ -144,7 +152,13 @@ let StepperContainer: React.FC<Iprops> = (props) => {
                     <div className={styles.finalStep}>
                         <Typography className={classes.instructions}>All steps completed</Typography>
 
-                        <Button  variant="contained" color="primary" onClick={handleReset}>Reset</Button>
+                        <div className={styles.buttonsWrapper}>
+                            <Button  variant="contained" onClick={handleReset}>Reset</Button>
+
+                            <Button  variant="contained" color="primary" onClick={props.onClose}>Close</Button>
+                        </div>
+
+
                     </div>
                 ) : (
                     <div>

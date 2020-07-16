@@ -23,6 +23,7 @@ export let getDataAPI = async (userName: string | null) => {
     let url = replaceEmailToURL(userName);
     return instance.get(`${url}apps.json`);
 };
+
 export let removeAppAPI = async (userName: string | null, app: IApp) => {
     if (userName === null)
         userName = '';
@@ -31,13 +32,12 @@ export let removeAppAPI = async (userName: string | null, app: IApp) => {
         console.log(response.data);
                 if(response.data !== null) {
                     let itemsKeys = Object.keys(response.data);
-                    let itemsValues = Object.values(response.data);
+                    let itemsValues   = Object.values(response.data);
                     let index = -1;
                     for (let i = 0; i < itemsValues.length; i++) {
                         // @ts-ignore
                         if (itemsValues[i].name === app.name) {
-                            // @ts-ignore
-                            console.log(itemsValues[i].name + "is equal " + app.name);
+
                             index = i;
                         }
                     }
@@ -54,10 +54,14 @@ export let removeAppAPI = async (userName: string | null, app: IApp) => {
 
 };
 export const authMeAPI = (userEmail: string, userPassword: string) => {
-
-
     return firebaseApp.auth().signInWithEmailAndPassword(userEmail, userPassword);
 };
+export const registerAPI = (userEmail: string, userPassword: string) => {
+    return firebaseApp.auth().createUserWithEmailAndPassword(userEmail, userPassword);
+};
+
+
+
 export const signOutAPI = () => {
     return firebaseApp.auth().signOut();
 };

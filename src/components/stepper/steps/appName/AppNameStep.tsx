@@ -3,15 +3,15 @@ import TextField from '@material-ui/core/TextField';
 // @ts-ignore
 import classes from './AppName.module.scss';
 import {maxLength, maxLength15} from "../../../../forms/validators";
+
 interface IProps {
     value: string
-    onAppNameChange: (appName:string) => void
-    isError:boolean
+    onAppNameChange: (appName: string) => void
+    isError: boolean
 }
 
 
 let AppName: React.FC<IProps> = (props) => {
-
 
 
     return (<div className={classes.Welcome}>
@@ -21,15 +21,17 @@ let AppName: React.FC<IProps> = (props) => {
                 <TextField
                     error={props.isError}
                     id="app_name"
-                    label=  "Your App Name"
+                    label="Your App Name"
                     variant="outlined"
                     defaultValue={props.value}
-                    onChange={(event)=>{props.onAppNameChange(event.target.value);
+                    onChange={(event) => {
+                        props.onAppNameChange(event.target.value);
                     }}
+                    required={true}
+                    helperText={props.isError ? "Max length must be 15." +
+                        "Field is required!" : ''}
                 />
-                <span className={classes.errorMessage}>{props.isError?<div>Max lenght must be 15
-                App name is required
-                </div>:<div></div>}</span>
+
             </div>
             <p>
                 Remember, you can always change your options in our App Configuration

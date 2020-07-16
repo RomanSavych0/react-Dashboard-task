@@ -3,8 +3,11 @@ import React from 'react';
 import styles from  './App.scss';
 import DashboardContainer from "./components/dashboard/Dashboard-container";
 import Header from "./components/header/Header";
-import {Route} from "react-router";
+import {Redirect, Route} from "react-router";
 import Login from "./components/login/Login";
+import {ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 class App extends React.Component{
 
 
@@ -13,9 +16,21 @@ class App extends React.Component{
       return (
           <div className={styles.appWrapper}>
               <Header/>
-
               <Route path='/login' render={() => <Login/>}/>
-              <Route path='/dashboard' render={() => <DashboardContainer/>}/>
+              <Route path='/dashboard' render={() =><DashboardContainer/>}/>
+               <Redirect to={'login'}/>
+              <ToastContainer
+                  position="bottom-right"
+                  autoClose={5000}
+                  hideProgressBar={false}
+                  newestOnTop={false}
+                  closeOnClick
+                  rtl={false}
+                  pauseOnFocusLoss
+                  draggable
+                  pauseOnHover
+              />
+
 
           </div>
       );

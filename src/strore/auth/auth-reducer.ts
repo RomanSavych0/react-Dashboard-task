@@ -1,7 +1,8 @@
 import dashboardReducer from "../dashboard/dashboard-reducer";
 import {authActionsTypes, authInitialStateType, AuthThunkType} from "./types";
-import {authMeAPI, signOutAPI} from "../../api/API";
+import {authMeAPI, registerAPI, signOutAPI} from "../../api/API";
 import {authActions} from "./actions";
+import {toast} from "react-toastify";
 
 export let initialState = {
     isAuth: false as boolean,
@@ -24,7 +25,21 @@ export let login = (email: string, pasword: string): AuthThunkType => {
             response => {
                 dispatch(authActions.authAC(email, true))
             }
-        ).catch(error => alert(error));
+        ).catch(error => toast.error(error.toString()));
+
+
+    }
+
+
+};
+export let register = (email: string, pasword: string): AuthThunkType => {
+    return async (dispatch) => {
+        registerAPI(email, pasword).then(
+            response => {
+                toast.success('Account has been created success');
+                // dispatch(authActions.authAC(email, false))
+            }
+        ).catch(error => toast.error(error.toString()));
 
 
     }
@@ -37,7 +52,7 @@ export let signOut = (): AuthThunkType => {
             response => {
                 dispatch(authActions.signOutAC())
             }
-        ).catch(error => alert(error));
+        ).catch(error => toast.error(error.toString()));
 
 
     }

@@ -15,7 +15,7 @@ const AppCreator: React.FC<Iprops> = (props) => {
             open={props.isOpened}
             onClose={()=>{props.onClose()}}>
             <div className={classes.modalWindowContentWrapper}>
-                <StepperContainer/>
+                <StepperContainer onClose ={props.onClose}/>
             </div>
         </Modal>
         </div>
