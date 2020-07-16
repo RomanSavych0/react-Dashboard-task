@@ -141,9 +141,10 @@ let StepperContainer: React.FC<Iprops> = (props) => {
             </Stepper>
             <div>
                 {activeStep === steps.length ? (
-                    <div>
+                    <div className={styles.finalStep}>
                         <Typography className={classes.instructions}>All steps completed</Typography>
-                        <Button onClick={handleReset}>Reset</Button>
+
+                        <Button  variant="contained" color="primary" onClick={handleReset}>Reset</Button>
                     </div>
                 ) : (
                     <div>

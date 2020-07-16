@@ -29,10 +29,17 @@ let LoginForm:React.FC<InjectedFormProps<IFormData>> = (props) => {
                    validate={maxLength15}
                    warn={aol}
             />
+            <Field name="isRegister" type="hidden"
+                   component={renderField}
+                   validate={maxLength15}
+                   warn={aol}
+            />
             <div className={styles.LoginButtons}>
             <Button variant="contained" color="primary" onClick={props.handleSubmit}>
                 Sign In
             </Button>
+
+
             </div>
         </form>
     )
@@ -54,7 +61,6 @@ interface IMapStateToProps {
 interface IProps {
     login:(email:string , password:string)=>void;
     isAuthorized:boolean
-
 }
 const Login:React.FC<IProps> = (props) => {
    const onSubmit =(formData:IFormData)=>{

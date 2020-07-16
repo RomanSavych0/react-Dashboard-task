@@ -4,7 +4,7 @@ import * as firebase from "../components/login/Login";
 import {IApp} from "../strore/dashboard/types";
 import {replaceEmailToURL} from "../forms/validators";
 
-const db = firebaseApp.database();
+firebaseApp.database();
 
 const instance = axios.create({
     baseURL: 'https://dashboard-content-editor.firebaseio.com/'
@@ -44,7 +44,6 @@ export let removeAppAPI = async (userName: string | null, app: IApp) => {
                     let key = itemsKeys[index];
 
 
-                    let indexAppToDelete = itemsValues.indexOf(app);
                     return instance.delete(`${url}apps/${key}.json`)
                 }}
     );

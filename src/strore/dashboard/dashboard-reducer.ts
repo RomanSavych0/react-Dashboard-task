@@ -132,7 +132,7 @@ export let removeApp = (app: IApp) => {
 export let removeAppThunk = (URL: string | null, app: IApp):DashBoardThunkType => {
     return async (dispatch) => {
         removeAppAPI(URL, app).then(response => {
-            dispatch(dashboardActions.removeAppAC(app))
+            dispatch(dashboardActions.removeAppAC(app));
         }).catch(error => console.log(error));
     };
 

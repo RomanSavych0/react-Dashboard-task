@@ -39,8 +39,11 @@ class DashboardContainer extends React.Component<PropsType, StateType> {
 
 
     componentDidUpdate(prevProps: PropsType, prevState: StateType) {
-        console.log("component update");
-        if (prevProps.apps !== this.props.apps) {
+
+
+        if ((this.props.apps.length !== this.state.apps.length))
+        {
+            console.log('update');
             this.props.setAppsThunk(this.props.userName);
             this.setState({
                 apps: this.props.apps
