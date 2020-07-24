@@ -9,9 +9,11 @@ export let initialState = {
     keys:[]as Array<string>,
     isEditorOpened: false as boolean,
     currentEditApp: {
+        appId: '',
         name: ' ', imageUrl: [' '], location: '', description: '',
         color: {}, isCategoryChecked: false, isMapChecked: false,
     } as IApp,
+    isEditAppMode:false as boolean
 };
 
 const dashboardReducer = (state = initialState, action: DashboardActionTypes): DashboardItitialState => {
@@ -45,6 +47,13 @@ const dashboardReducer = (state = initialState, action: DashboardActionTypes): D
             return {
                 ...state, keys: action.keys
             };
+            case 'SET-IS-EDIT-APP-MODE':
+            return{
+                  ...state , isEditAppMode : action.editMode  
+
+            }
+
+            
 
         default:
             return state;
@@ -55,32 +64,50 @@ const dashboardReducer = (state = initialState, action: DashboardActionTypes): D
 
 export const addAppThunk = (userName: string | null, appName: string, ImageUrl: Array<string>,
                           description: string, isMapChecked: boolean,
-                          isCategoryChecked: boolean, color: any, location: string): DashBoardThunkType => {
+                          isCategoryChecked: boolean, 
+                          color: any, location: string,
+                          userId: string | null
+                          ): DashBoardThunkType => {
     let app = {
+        appId:'',
         name: appName, imageUrl: ImageUrl, description: description,
         isMapChecked: isMapChecked, isCategoryChecked: isCategoryChecked, color: color, location: location
     };
     if (userName === null)
         userName = '';
     return async (dispatch) => {
-        addAppAPI(userName, app).then(
-            response => {
-                dispatch(dashboardActions.addAppAC(app))
+        let key= addAppAPI(userId, app).key
+        if(key === null)
+        key =' '
+        app.appId = key;
+        console.log(app.appId);
+        dispatch(dashboardActions.addAppAC(app))
+    
             }
-        ).catch(error => alert(error));
-    }
 };
-export const setAppsThunk = (URL: string | null): DashBoardThunkType => {
+
+// interface responseApps{
+// apps: Array<{app :IApp}>;
+// }
+
+export const setAppsThunk = (userID: string | null): DashBoardThunkType => {
 
     return async (dispatch) => {
-        getDataAPI(URL).then(response => {
-            let data = Object.values(response.data);
-            let appsArray = [];
-            for (let item of data) {
-                appsArray.push(item)
-            }
+        getDataAPI(userID).then(function (snapshot) {
+             let appsArray = [] as Array<IApp>;
+             for (let item of  Object.values(snapshot.val())) {
+                    //@ts-ignore
+                 appsArray.push(item)
+             }
+             let i = 0;
+              for(let key of Object.keys(snapshot.val())){
+                    appsArray[i].appId = key;
+                    console.log(i);
+                    i = i+1;
+              }    
+
             // @ts-ignore
-            dispatch(dashboardActions.setAppsAC(appsArray))
+             dispatch(dashboardActions.setAppsAC(appsArray))
         }).catch(error => dispatch(dashboardActions.setAppsAC([])));
     };
 };
@@ -102,10 +129,10 @@ export const setEditApp = (app: IApp) => {
     }
 };
 
-export const removeAppThunk = (URL: string | null, app: IApp):DashBoardThunkType => {
+export const removeAppThunk = (userId: string | null, app: IApp):DashBoardThunkType => {
     return async (dispatch) => {
-        removeAppAPI(URL, app).then(response => {
-            dispatch(dashboardActions.removeAppAC(app));
+        removeAppAPI(userId, app).then(response => {
+
         }).catch(error => console.log(error));
     };
 

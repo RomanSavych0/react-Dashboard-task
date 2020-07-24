@@ -10,3 +10,10 @@ const firebaseConfig={
     appId: "1:799673362888:web:2916da1877cf03556e38fd"
 };
 export  let firebaseApp = firebase.initializeApp(firebaseConfig);
+let database = firebaseApp.database();
+export let test =()=>{
+database.ref('users/' + 1 ).set({ 
+userName:'name',
+    email:'email', 
+})
+}

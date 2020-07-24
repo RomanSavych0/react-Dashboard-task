@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react'
 import {connect} from "react-redux";
 import {AppStateType} from "../../strore/redux-store";
-import {AppBar} from "@material-ui/core";
+import {AppBar, WithStyles} from "@material-ui/core";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
@@ -9,11 +9,21 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 import {NavLink} from "react-router-dom";
 import {signOut} from "../../strore/auth/auth-reducer";
 
+const styles = {
+    root: {
+      background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+      
+    },
+  };
+
+
+
 interface IProps {
     email: string | null,
     isAuthorized: boolean
     signOut: () => void
 }
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -26,6 +36,7 @@ const useStyles = makeStyles((theme) => ({
         flexGrow: 1,
     },
 }));
+
 
 const Header: React.FC<IProps> = (props) => {
     let [isAuth, setIsAuth] = React.useState<boolean>(props.isAuthorized);

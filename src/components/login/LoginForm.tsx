@@ -18,7 +18,7 @@ interface IFormData {
 }
 
 interface IProps {
-    login: (email: string, password: string) => void;
+    handleSubmitLogin: (email: string, password: string) => void;
     register: (email: string, password: string) => void;
 }
 
@@ -60,7 +60,7 @@ const LoginForm: React.FC<InjectedFormProps<IFormData, IProps> & IProps> = (
     props
 ) => {
     const onSubmit = (formData: IFormData) => {
-        props.login(formData.email, formData.password);
+        props.handleSubmitLogin(formData.email, formData.password);
     };
     const onRegister = (formData: IFormData) => {
         props.register(formData.email, formData.password);

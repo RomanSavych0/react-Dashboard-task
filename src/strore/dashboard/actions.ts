@@ -23,6 +23,8 @@ export const dashboardActions = {
     },
     setKeysAC:(keys:Array<string>)=>{
       return{type:'SET-KEYS' , keys}as const
-    }
-
+    },
+    setisEditAppMode:( editMode : boolean)=>{
+    return{type:'SET-IS-EDIT-APP-MODE' , editMode}  as const
+    }   
 };

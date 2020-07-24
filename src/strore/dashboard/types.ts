@@ -3,7 +3,6 @@ import {ThunkAction} from "redux-thunk";
 import {AppStateType, InfrerActionsTypes} from "../redux-store";
 import {dashboardActions} from "./actions";
 export interface IApp {
-    addId?: number
     name: string
     imageUrl:Array<string>
     description:string
@@ -11,6 +10,8 @@ export interface IApp {
     isCategoryChecked:boolean
     color:any
     location:string
+    appId?: string
+
 }
 
 export type DashboardActionTypes = InfrerActionsTypes<typeof dashboardActions>;

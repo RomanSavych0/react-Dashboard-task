@@ -2,30 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c5bb9ee4-d75e-4290-bc27-8fe0eaac145a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/types/modules.d.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json.3543981801" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/API.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/API.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/app-editor/AppCreator.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/app-editor/AppCreator.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/dashboard/DashboardContainer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/dashboard/DashboardContainer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/dashboard/apps/AppItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/dashboard/apps/AppItem.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/dashboard/apps/Apps.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/dashboard/apps/Apps.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/login/Login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/login/Login.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/login/LoginForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/login/LoginForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/stepper/StepperContainer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/stepper/StepperContainer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/stepper/steps/appImage/AppImage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/stepper/steps/appImage/AppImage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/stepper/steps/appName/AppNameStep.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/stepper/steps/appName/AppNameStep.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/stepper/steps/description/AppDescription.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/stepper/steps/description/AppDescription.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/stepper/steps/features/AppFeatures.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/stepper/steps/features/AppFeatures.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/stepper/steps/preview/AppPreview.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/stepper/steps/preview/AppPreview.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/firebase/firebase.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/firebase/firebase.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/strore/auth/auth-reducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/strore/auth/auth-reducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/strore/dashboard/dashboard-reducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/strore/dashboard/dashboard-reducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/object-helper.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/object-helper.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -53,8 +30,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/dashboard/DashboardContainer.tsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="234">
-              <caret line="24" column="1" lean-forward="true" selection-start-line="24" selection-start-column="1" selection-end-line="24" selection-end-column="1" />
+            <state relative-caret-position="442">
+              <caret line="29" lean-forward="true" selection-start-line="29" selection-end-line="29" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
                 <element signature="e#291#345#0" expanded="true" />
@@ -183,7 +160,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6" fullScreen="true">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="453" />
     <option name="y" value="101" />
     <option name="width" value="1549" />
@@ -444,7 +421,7 @@
       <workItem from="1594677025751" duration="25662000" />
       <workItem from="1594736994279" duration="101392000" />
       <workItem from="1594918284857" duration="36000" />
-      <workItem from="1594918398645" duration="1308000" />
+      <workItem from="1594918398645" duration="2784000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1594658782103</created>
@@ -523,20 +500,35 @@
       <option name="project" value="LOCAL" />
       <updated>1594910997891</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="bug fixed.">
+      <created>1594919824293</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1594919824293</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Component did update bug fixed.">
+      <created>1594920465026</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1594920465026</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="156164000" />
+    <option name="totallyTimeSpent" value="157640000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1920" height="1080" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1096" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.3166491" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.3166491" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
+      <window_info anchor="bottom" id="Messages" weight="0.32936507" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32837301" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.2777778" />
@@ -589,7 +581,9 @@
     <MESSAGE value="." />
     <MESSAGE value="added validators , email register , login , toast" />
     <MESSAGE value="code style refactoring" />
-    <option name="LAST_COMMIT_MESSAGE" value="code style refactoring" />
+    <MESSAGE value="bug fixed." />
+    <MESSAGE value="Component did update bug fixed." />
+    <option name="LAST_COMMIT_MESSAGE" value="Component did update bug fixed." />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/node_modules/@types/redux-form/lib/Field.d.ts" />
@@ -945,8 +939,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/dashboard/DashboardContainer.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="24" column="1" lean-forward="true" selection-start-line="24" selection-start-column="1" selection-end-line="24" selection-end-column="1" />
+        <state relative-caret-position="442">
+          <caret line="29" lean-forward="true" selection-start-line="29" selection-end-line="29" />
           <folding>
             <element signature="e#0#25#0" expanded="true" />
             <element signature="e#291#345#0" expanded="true" />
