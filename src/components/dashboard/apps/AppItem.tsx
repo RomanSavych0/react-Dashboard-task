@@ -1,16 +1,16 @@
-import React from "react";
-import { IApp } from "../../../strore/dashboard/types";
-import classes from "./AppItem.module.scss";
-import Button from "@material-ui/core/Button";
-import { Paper } from "@material-ui/core";
-import appDefaultImage from "../../../asserts/images/default-image.png";
+import React from 'react'
+import { IApp } from '../../../strore/dashboard/types'
+import classes from './AppItem.module.scss'
+import Button from '@material-ui/core/Button'
+import { Paper } from '@material-ui/core'
+import appDefaultImage from '../../../asserts/images/default-image.png'
 
 interface Iprops {
-  app: IApp;
-  closeEditor: () => void;
-  openEditor: () => void;
-  setApp: (app: IApp) => void;
-  setIsEditAppMode: (isEdit: boolean) => void;
+  app: IApp
+  closeEditor: () => void
+  openEditor: () => void
+  setApp: (app: IApp) => void
+  setIsEditAppMode: (isEdit: boolean) => void
 }
 
 const AppItem: React.FC<Iprops> = (props) => {
@@ -20,7 +20,7 @@ const AppItem: React.FC<Iprops> = (props) => {
         {
           <img
             src={`${
-              props.app.imageUrl[0] === " " || undefined
+              props.app.imageUrl[0] === ' ' || undefined
                 ? appDefaultImage
                 : props.app.imageUrl[0]
             }`}
@@ -36,15 +36,15 @@ const AppItem: React.FC<Iprops> = (props) => {
           variant="contained"
           color="primary"
           onClick={() => {
-            props.setApp(props.app);
-            props.openEditor();
-            props.setIsEditAppMode(true);
+            props.setApp(props.app)
+            props.openEditor()
+            props.setIsEditAppMode(true)
           }}
         >
           Edit App
         </Button>
       </div>
     </Paper>
-  );
-};
-export default AppItem;
+  )
+}
+export default AppItem

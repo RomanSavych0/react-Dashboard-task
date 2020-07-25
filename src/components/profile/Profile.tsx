@@ -1,12 +1,8 @@
 import React from 'react'
 
-interface Iprops{
-    name:string
+interface Iprops {
+  name: string
 }
-const Profile=()=>{
+const Profile = () => {}
 
-
-
-}
-
-export default Profile;
+export default Profile
