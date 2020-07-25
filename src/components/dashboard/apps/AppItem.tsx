@@ -10,23 +10,22 @@ interface Iprops {
   closeEditor: () => void;
   openEditor: () => void;
   setApp: (app: IApp) => void;
-  setIsEditAppMode:(isEdit:boolean)=>void;
+  setIsEditAppMode: (isEdit: boolean) => void;
 }
 
 const AppItem: React.FC<Iprops> = (props) => {
-
   return (
     <Paper className={classes.appWrapper}>
       <div className={classes.item}>
         {
-            <img
-              src={`${
-                props.app.imageUrl[0] === " " || undefined
-                  ? appDefaultImage
-                  : props.app.imageUrl[0]
-              }`}
-              alt="app"
-            />
+          <img
+            src={`${
+              props.app.imageUrl[0] === " " || undefined
+                ? appDefaultImage
+                : props.app.imageUrl[0]
+            }`}
+            alt="app"
+          />
         }
       </div>
       <div className={classes.item}>

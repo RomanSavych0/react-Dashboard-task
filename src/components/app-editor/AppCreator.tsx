@@ -21,7 +21,6 @@ const AppCreator: React.FC<Iprops> = (props) => {
           <StepperContainer onClose={props.onClose} />
         </div>
       </Modal>
-      
     </div>
   );
 };

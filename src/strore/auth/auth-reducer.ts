@@ -2,6 +2,7 @@ import { authActionsTypes, authInitialStateType, AuthThunkType } from "./types";
 import { authMeAPI, registerAPI, signOutAPI } from "../../api/API";
 import { authActions } from "./actions";
 import { toast } from "react-toastify";
+
 export const initialState = {
   isAuth: false as boolean,
   login: null as string | null,
@@ -32,18 +33,12 @@ export const login = (email: string, password: string): AuthThunkType => {
     authMeAPI(email, password)
       .then((response) => {
         localStorage.setItem("email", email);
-      localStorage.setItem("password", password);
-      localStorage.setItem("userUd",  response.user.uid);
+        localStorage.setItem("password", password);
+        localStorage.setItem("userUd",  response.user.uid);
         dispatch(authActions.authAC(email, true, response.user.uid , password ));
       })
       .catch((error) => toast.error(error.toString()));
-  
-  
-  
     };
-
-
-
 };
 
 export const register = (email: string, pasword: string): AuthThunkType => {
@@ -62,9 +57,7 @@ export const signOut = (): AuthThunkType => {
     signOutAPI()
       .then((response) => {
         localStorage.clear();
-
         dispatch(authActions.signOutAC());
-      
       })
       .catch((error) => toast.error(error.toString()));
   };
