@@ -7,6 +7,7 @@ import {
   openEditor,
   setAppsThunk,
   setEditApp,
+  setIsEditAppMode,
 } from "../../strore/dashboard/dashboard-reducer";
 // @ts-ignore
 import classes from "./DashboardContainer.module.scss";
@@ -28,6 +29,7 @@ interface IMapDispatchToProps {
   openEditor: () => void;
   setEditApp: (app: IApp) => void;
   setAppsThunk: (url: string | null) => void;
+  setIsEditAppMode: (isEdit: boolean) => void;
 }
 
 interface StateType {
@@ -42,8 +44,7 @@ class DashboardContainer extends React.Component<PropsType, StateType> {
   };
 
   componentDidUpdate(prevProps: PropsType, prevState: StateType) {
-    console.log(this.state.apps);
-    if (this.props.apps.length !== this.state.apps.length) {
+    if (this.props.apps !== this.state.apps) {
       this.props.setAppsThunk(this.props.userId);
       this.setState({
         apps: this.props.apps,
@@ -52,7 +53,6 @@ class DashboardContainer extends React.Component<PropsType, StateType> {
   }
 
   componentDidMount(): void {
-    console.log(this.state.apps);
     if (this.props.isUserAuth) {
       this.props.setAppsThunk(this.props.userId);
     }
@@ -93,13 +93,13 @@ class DashboardContainer extends React.Component<PropsType, StateType> {
                 <h2>your application list is empty</h2>
               </div>
             ) : (
-                <Apps
-                  apps={this.state.apps}
-                  isOpened={this.props.openEditor}
-                  isClosed={this.props.closeEditor}
-                  setApp={this.props.setEditApp}
-                />
-    
+              <Apps
+                apps={this.state.apps}
+                isOpened={this.props.openEditor}
+                isClosed={this.props.closeEditor}
+                setApp={this.props.setEditApp}
+                setIsEditAppMode={this.props.setIsEditAppMode}
+              />
             )}
           </div>
         </div>
@@ -123,4 +123,5 @@ export default connect(mapStateToProps, {
   closeEditor,
   setEditApp,
   setAppsThunk,
+  setIsEditAppMode,
 })(DashboardContainer);

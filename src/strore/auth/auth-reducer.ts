@@ -16,7 +16,6 @@ const authReducer = (
 ): authInitialStateType => {
   switch (action.type) {
     case "SET_USER_DATA":
-      console.log(action.userId)
       return { ...state, login: action.login, isAuth: action.isAuth , 
         userId :action.userId,
         password:action.password

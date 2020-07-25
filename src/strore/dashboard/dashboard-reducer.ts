@@ -1,5 +1,5 @@
 import {DashboardActionTypes, DashboardItitialState, DashBoardThunkType, IApp} from "./types";
-import {addObjintoArray, removeObjectFromArray} from "../../utils/object-helper";
+import {addObjintoArray, removeObjectFromArray , editAppInArray} from "../../utils/object-helper";
 import {dashboardActions} from "./actions";
 import {Dispatch} from "redux";
 import {addAppAPI,  getDataAPI, removeAppAPI} from "../../api/API";
@@ -53,6 +53,11 @@ const dashboardReducer = (state = initialState, action: DashboardActionTypes): D
 
             }
 
+         case'SET-NEW-APP-VALUE':
+            return{
+                ...state ,  apps :editAppInArray(state.apps , action.app)
+            }
+
             
 
         default:
@@ -61,6 +66,11 @@ const dashboardReducer = (state = initialState, action: DashboardActionTypes): D
 };
 
 
+export const setIsEditAppMode = (isEdit: boolean)=>{
+    return (dispatch: Dispatch) => {
+        dispatch(dashboardActions.setisEditAppMode(isEdit))
+    }
+} 
 
 export const addAppThunk = (userName: string | null, appName: string, ImageUrl: Array<string>,
                           description: string, isMapChecked: boolean,
@@ -102,7 +112,6 @@ export const setAppsThunk = (userID: string | null): DashBoardThunkType => {
              let i = 0;
               for(let key of Object.keys(snapshot.val())){
                     appsArray[i].appId = key;
-                    console.log(i);
                     i = i+1;
               }    
 
@@ -132,7 +141,7 @@ export const setEditApp = (app: IApp) => {
 export const removeAppThunk = (userId: string | null, app: IApp):DashBoardThunkType => {
     return async (dispatch) => {
         removeAppAPI(userId, app).then(response => {
-
+            dispatch(dashboardActions.editAppAC(app))
         }).catch(error => console.log(error));
     };
 

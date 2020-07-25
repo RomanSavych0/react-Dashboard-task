@@ -20,8 +20,6 @@ const Login: React.FC<IProps> = (props) => {
   if (!props.isAuthorized) {
     if (emailLocalStorage !== null) {
       if (passwordLocalStorage !== null) {
-        console.log(emailLocalStorage);
-        console.log(passwordLocalStorage);
         props.login(emailLocalStorage, passwordLocalStorage);
       }
     }

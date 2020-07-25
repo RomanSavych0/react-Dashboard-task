@@ -1,9 +1,11 @@
-.buttonsWrapper{
-display: flex;
+.buttonsWrapper {
+  display: flex;
   justify-content: center;
   align-items: center;
+  flex-wrap: column;
+  border: 1px solid red;
 }
-.finalStep{
+.finalStep {
   display: flex;
   align-items: center;
   justify-content: center;

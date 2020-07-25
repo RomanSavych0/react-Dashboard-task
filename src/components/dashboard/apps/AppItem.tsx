@@ -10,6 +10,7 @@ interface Iprops {
   closeEditor: () => void;
   openEditor: () => void;
   setApp: (app: IApp) => void;
+  setIsEditAppMode:(isEdit:boolean)=>void;
 }
 
 const AppItem: React.FC<Iprops> = (props) => {
@@ -38,6 +39,7 @@ const AppItem: React.FC<Iprops> = (props) => {
           onClick={() => {
             props.setApp(props.app);
             props.openEditor();
+            props.setIsEditAppMode(true);
           }}
         >
           Edit App

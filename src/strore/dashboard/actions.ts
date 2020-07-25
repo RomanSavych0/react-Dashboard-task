@@ -26,5 +26,10 @@ export const dashboardActions = {
     },
     setisEditAppMode:( editMode : boolean)=>{
     return{type:'SET-IS-EDIT-APP-MODE' , editMode}  as const
-    }   
-};
+    },   
+    editAppAC:( app:IApp)=>{
+    return{type:'SET-NEW-APP-VALUE' , app}  as const
+    },   
+
+
+  };

@@ -8,6 +8,7 @@ interface IProps {
   isOpened: () => void;
   isClosed: () => void;
   setApp: (app: IApp) => void;
+  setIsEditAppMode:(isEdit:boolean)=>void;
 }
 
 const Apps: React.FC<IProps> = (props) => {
@@ -15,6 +16,7 @@ const Apps: React.FC<IProps> = (props) => {
 
     return (
       <AppItem
+      setIsEditAppMode = {props.setIsEditAppMode}
         app={a}
         closeEditor={props.isClosed}
         openEditor={props.isOpened}

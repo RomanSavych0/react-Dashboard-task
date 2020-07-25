@@ -16,6 +16,7 @@ import {
   addAppThunk,
   removeAppThunk,
   setEditApp,
+  setIsEditAppMode,
 } from "../../strore/dashboard/dashboard-reducer";
 import { IApp } from "../../strore/dashboard/types";
 import styles from "./StepperContainer.module.scss";
@@ -35,9 +36,11 @@ interface Iprops {
   app: IApp;
   removeAppThunk: (name: string | null, app: IApp) => void;
   setEditApp: (app: IApp) => void;
+  setIsEditAppMode: (edit: boolean) => void;
   userName: string | null;
   userId: string | null;
   onClose: () => void;
+  isEditAppMode: boolean;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -94,29 +97,31 @@ let StepperContainer: React.FC<Iprops> = (props) => {
   };
 
   const finishHandler = () => {
-    props.removeAppThunk(props.userId, {
-      appId: props.app.appId,
-      name: appName,
-      imageUrl: url,
-      color: color,
-      location: location,
-      description: description,
-      isMapChecked: isMapChecked,
-      isCategoryChecked: isCategoryChecked,
-    });
-    // props.addAppThunk(
-    //   props.userName,
-    //   appName,
-    //   url,
-    //   description,
-    //   isMapChecked,
-    //   isCategoryChecked,
-    //   color,
-    //   location,
-    //   props.userId
-    // );
-
-    //
+    if (props.isEditAppMode) {
+      props.removeAppThunk(props.userId, {
+        appId: props.app.appId,
+        name: appName,
+        imageUrl: url,
+        color: color,
+        location: location,
+        description: description,
+        isMapChecked: isMapChecked,
+        isCategoryChecked: isCategoryChecked,
+      });
+      props.setIsEditAppMode(false);
+    } else {
+      props.addAppThunk(
+        props.userName,
+        appName,
+        url,
+        description,
+        isMapChecked,
+        isCategoryChecked,
+        color,
+        location,
+        props.userId
+      );
+    }
     props.setEditApp({
       name: " ",
       imageUrl: [" "],
@@ -275,10 +280,12 @@ let mapStateToProps = (state: AppStateType) => {
     app: state.dashboardPage.currentEditApp,
     userName: state.auth.login,
     userId: state.auth.userId,
+    isEditAppMode: state.dashboardPage.isEditAppMode,
   };
 };
 export default connect(mapStateToProps, {
   addAppThunk,
   removeAppThunk,
   setEditApp,
+  setIsEditAppMode,
 })(StepperContainer);

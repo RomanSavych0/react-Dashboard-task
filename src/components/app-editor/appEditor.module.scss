@@ -1,4 +1,4 @@
-.modalWindowContentWrapper{
+.modalWindowContentWrapper {
   background-color: white;
   width: 80%;
   height: 80%;
@@ -6,8 +6,11 @@
   justify-content: center;
   align-content: center;
   align-items: center;
+  @media screen and(max-width:507px) {
+    height: 100%;
+  }
 }
-.modalWindowWrapper{
+.modalWindowWrapper {
   display: flex;
   justify-content: center;
   align-content: center;
