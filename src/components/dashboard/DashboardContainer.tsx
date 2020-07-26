@@ -1,66 +1,78 @@
-import React from "react";
-import { connect } from "react-redux";
-import { AppStateType } from "../../strore/redux-store";
-import { IApp } from "../../strore/dashboard/types";
+import React from 'react'
+import { connect } from 'react-redux'
+import { AppStateType } from '../../strore/redux-store'
+import { IApp } from '../../strore/dashboard/types'
 import {
   closeEditor,
   openEditor,
   setAppsThunk,
   setEditApp,
   setIsEditAppMode,
-} from "../../strore/dashboard/dashboard-reducer";
-// @ts-ignore
-import classes from "./DashboardContainer.module.scss";
-import Button from "@material-ui/core/Button";
-import AppCreator from "../app-editor/AppCreator";
-import Apps from "./apps/Apps";
-import { Redirect } from "react-router";
+} from '../../strore/dashboard/dashboard-reducer'
+
+import classes from './DashboardContainer.module.scss'
+import Button from '@material-ui/core/Button'
+import AppCreator from '../app-editor/AppCreator'
+import Apps from './apps/Apps'
+import { Redirect } from 'react-router'
 
 interface IMapStateToProps {
-  apps: Array<IApp>;
-  isEditorOpen: boolean;
-  userName: string | null;
-  isUserAuth: boolean;
-  userId: string | null;
+  apps: Array<IApp>
+  isEditorOpen: boolean
+  userName: string | null
+  isUserAuth: boolean
+  userId: string | null
 }
 
 interface IMapDispatchToProps {
-  closeEditor: () => void;
-  openEditor: () => void;
-  setEditApp: (app: IApp) => void;
-  setAppsThunk: (url: string | null) => void;
-  setIsEditAppMode: (isEdit: boolean) => void;
+  closeEditor: () => void
+  openEditor: () => void
+  setEditApp: (app: IApp) => void
+  setAppsThunk: (url: string | null) => void
+  setIsEditAppMode: (isEdit: boolean) => void
 }
 
 interface StateType {
-  apps: Array<IApp>;
+  apps: Array<IApp>
 }
 
-type PropsType = IMapStateToProps & IMapDispatchToProps;
+type PropsType = IMapStateToProps & IMapDispatchToProps
 
 class DashboardContainer extends React.Component<PropsType, StateType> {
   state = {
     apps: this.props.apps,
-  };
+  }
+  closeHandler = () => {
+    this.props.setEditApp({
+      name: ' ',
+      imageUrl: [' '],
+      location: '',
+      description: '',
+      color: {},
+      isCategoryChecked: false,
+      isMapChecked: false,
+    })
+    this.props.closeEditor()
+  }
 
-  componentDidUpdate(prevProps: PropsType, prevState: StateType) {
+  componentDidUpdate() {
     if (this.props.apps !== this.state.apps) {
-      this.props.setAppsThunk(this.props.userId);
+      this.props.setAppsThunk(this.props.userId)
       this.setState({
         apps: this.props.apps,
-      });
+      })
     }
   }
 
   componentDidMount(): void {
     if (this.props.isUserAuth) {
-      this.props.setAppsThunk(this.props.userId);
+      this.props.setAppsThunk(this.props.userId)
     }
   }
 
   render() {
     if (!this.props.isUserAuth) {
-      return <Redirect to={"/login"} />;
+      return <Redirect to={'/login'} />
     }
 
     return (
@@ -77,14 +89,23 @@ class DashboardContainer extends React.Component<PropsType, StateType> {
                   color="primary"
                   onClick={this.props.openEditor}
                 >
-                  <b>+</b> Create App
+                  <b
+                    style={{
+                      justifyContent: 'center',
+                      height: '100%',
+                      marginRight: '10px',
+                    }}
+                  >
+                    +
+                  </b>{' '}
+                  Create App
                 </Button>
               </h2>
             </div>
           </div>
           <AppCreator
             isOpened={this.props.isEditorOpen}
-            onClose={this.props.closeEditor}
+            onClose={this.closeHandler}
           />
           Apps:
           <div className={classes.appsWrapper}>
@@ -104,19 +125,19 @@ class DashboardContainer extends React.Component<PropsType, StateType> {
           </div>
         </div>
       </div>
-    );
+    )
   }
 }
 
-let mapStateToProps = (state: AppStateType): IMapStateToProps => {
+const mapStateToProps = (state: AppStateType): IMapStateToProps => {
   return {
     apps: state.dashboardPage.apps,
     isEditorOpen: state.dashboardPage.isEditorOpened,
     userName: state.auth.login,
     isUserAuth: state.auth.isAuth,
     userId: state.auth.userId,
-  };
-};
+  }
+}
 
 export default connect(mapStateToProps, {
   openEditor,
@@ -124,4 +145,4 @@ export default connect(mapStateToProps, {
   setEditApp,
   setAppsThunk,
   setIsEditAppMode,
-})(DashboardContainer);
+})(DashboardContainer)

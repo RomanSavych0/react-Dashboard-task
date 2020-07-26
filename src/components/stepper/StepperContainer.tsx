@@ -1,26 +1,26 @@
-import React from "react";
-import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import AppName from "./steps/appName/AppNameStep";
-import Stepper from "@material-ui/core/Stepper/Stepper";
-import Step from "@material-ui/core/Step/Step";
-import StepLabel from "@material-ui/core/StepLabel/StepLabel";
-import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
-import AppImage from "./steps/appImage/AppImage";
-import AppDescription from "./steps/description/AppDescription";
-import AppFeatures from "./steps/features/AppFeatures";
-import AppPreview from "./steps/preview/AppPreview";
-import { connect } from "react-redux";
-import { AppStateType } from "../../strore/redux-store";
+import React from 'react'
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
+import AppName from './steps/appName/AppNameStep'
+import Stepper from '@material-ui/core/Stepper/Stepper'
+import Step from '@material-ui/core/Step/Step'
+import StepLabel from '@material-ui/core/StepLabel/StepLabel'
+import Typography from '@material-ui/core/Typography'
+import Button from '@material-ui/core/Button'
+import AppImage from './steps/appImage/AppImage'
+import AppDescription from './steps/description/AppDescription'
+import AppFeatures from './steps/features/AppFeatures'
+import AppPreview from './steps/preview/AppPreview'
+import { connect } from 'react-redux'
+import { AppStateType } from '../../strore/redux-store'
 import {
   addAppThunk,
   removeAppThunk,
   setEditApp,
   setIsEditAppMode,
-} from "../../strore/dashboard/dashboard-reducer";
-import { IApp } from "../../strore/dashboard/types";
-import styles from "./StepperContainer.module.scss";
-import CustomButtom from ".././cusom-button/CustomButton";
+} from '../../strore/dashboard/dashboard-reducer'
+import { IApp } from '../../strore/dashboard/types'
+import styles from './StepperContainer.module.scss'
+import CustomButtom from '.././cusom-button/CustomButton'
 interface Iprops {
   addAppThunk: (
     userName: string | null,
@@ -29,24 +29,25 @@ interface Iprops {
     description: string,
     isMapChecked: boolean,
     isCategoryChecked: boolean,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     color: any,
     location: string,
-    userId: string | null
-  ) => void;
-  app: IApp;
-  removeAppThunk: (name: string | null, app: IApp) => void;
-  setEditApp: (app: IApp) => void;
-  setIsEditAppMode: (edit: boolean) => void;
-  userName: string | null;
-  userId: string | null;
-  onClose: () => void;
-  isEditAppMode: boolean;
+    userId: string | null,
+  ) => void
+  app: IApp
+  removeAppThunk: (name: string | null, app: IApp) => void
+  setEditApp: (app: IApp) => void
+  setIsEditAppMode: (edit: boolean) => void
+  userName: string | null
+  userId: string | null
+  onClose: () => void
+  isEditAppMode: boolean
 }
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      width: "100%",
+      width: '100%',
     },
     backButton: {
       marginRight: theme.spacing(1),
@@ -55,46 +56,48 @@ const useStyles = makeStyles((theme: Theme) =>
       marginTop: theme.spacing(1),
       marginBottom: theme.spacing(1),
     },
-  })
-);
+  }),
+)
 
 function getSteps() {
-  return ["Welcome", "Branding", "Info", "Features", "Preview"];
+  return ['Welcome', 'Branding', 'Info', 'Features', 'Preview']
 }
 
 const isErrorHandler = (value: string, maxLenght: number) => {
   if (value.length > maxLenght) {
-    return true;
+    return true
   } else {
-    return false;
+    return false
   }
-};
-let StepperContainer: React.FC<Iprops> = (props) => {
-  const classes = useStyles();
-  const [activeStep, setActiveStep] = React.useState(0);
-  let [appName, setAppName] = React.useState<string>(props.app.name);
-  let [url, setUrl] = React.useState<Array<string>>(props.app.imageUrl);
-  let [description, setAppdescription] = React.useState<string>(
-    props.app.description
-  );
-  let [isError, setIsError] = React.useState<boolean>(false);
-  let [isMapChecked, setIsMapChecked] = React.useState<boolean>(
-    props.app.isMapChecked
-  );
-  let [isCategoryChecked, setIsCategoryChecked] = React.useState<boolean>(
-    props.app.isCategoryChecked
-  );
-  let [color, setColor] = React.useState<any>(props.app.color);
-  let [location, setLocation] = React.useState<string>(props.app.location);
+}
+const StepperContainer: React.FC<Iprops> = (props) => {
+  const classes = useStyles()
+  const [activeStep, setActiveStep] = React.useState(0)
+  const [appName, setAppName] = React.useState<string>(props.app.name)
+  const [url, setUrl] = React.useState<Array<string>>(props.app.imageUrl)
+  const [description, setAppdescription] = React.useState<string>(
+    props.app.description,
+  )
+  const [isError, setIsError] = React.useState<boolean>(false)
+  const [isMapChecked, setIsMapChecked] = React.useState<boolean>(
+    props.app.isMapChecked,
+  )
+  const [isCategoryChecked, setIsCategoryChecked] = React.useState<boolean>(
+    props.app.isCategoryChecked,
+  )
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [color, setColor] = React.useState<any>(props.app.color)
+  const [location, setLocation] = React.useState<string>(props.app.location)
 
   const setAppNameWithValidator = (name: string) => {
-    setAppName(name);
-    let isErr: boolean = isErrorHandler(appName, 30);
-    setIsError(isErr);
-  };
-  const onDropImage = (Files: any, Url: any) => {
-    setUrl(Url);
-  };
+    setAppName(name)
+    const isErr: boolean = isErrorHandler(appName, 30)
+    setIsError(isErr)
+  }
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const onDropImage = (Url: any) => {
+    setUrl(Url)
+  }
 
   const finishHandler = () => {
     if (props.isEditAppMode) {
@@ -107,8 +110,8 @@ let StepperContainer: React.FC<Iprops> = (props) => {
         description: description,
         isMapChecked: isMapChecked,
         isCategoryChecked: isCategoryChecked,
-      });
-      props.setIsEditAppMode(false);
+      })
+      props.setIsEditAppMode(false)
     } else {
       props.addAppThunk(
         props.userName,
@@ -119,20 +122,20 @@ let StepperContainer: React.FC<Iprops> = (props) => {
         isCategoryChecked,
         color,
         location,
-        props.userId
-      );
+        props.userId,
+      )
     }
     props.setEditApp({
-      name: " ",
-      imageUrl: [" "],
-      location: "",
-      description: "",
+      name: ' ',
+      imageUrl: [' '],
+      location: '',
+      description: '',
       color: {},
       isCategoryChecked: false,
       isMapChecked: false,
-    });
-    handleNext();
-  };
+    })
+    handleNext()
+  }
 
   function getStepContent(stepIndex: number) {
     switch (stepIndex) {
@@ -143,7 +146,7 @@ let StepperContainer: React.FC<Iprops> = (props) => {
             value={appName}
             onAppNameChange={setAppNameWithValidator}
           />
-        );
+        )
       case 1:
         return (
           <AppImage
@@ -152,7 +155,7 @@ let StepperContainer: React.FC<Iprops> = (props) => {
             color={color}
             setColor={setColor}
           />
-        );
+        )
       case 2:
         return (
           <AppDescription
@@ -164,7 +167,7 @@ let StepperContainer: React.FC<Iprops> = (props) => {
             isError={isError}
             descChanged={setAppdescription}
           />
-        );
+        )
       case 3:
         return (
           <AppFeatures
@@ -173,7 +176,7 @@ let StepperContainer: React.FC<Iprops> = (props) => {
             setIsCategoryChecked={setIsCategoryChecked}
             setIsMapChecked={setIsMapChecked}
           />
-        );
+        )
       case 4:
         return (
           <AppPreview
@@ -184,30 +187,30 @@ let StepperContainer: React.FC<Iprops> = (props) => {
             ismapChecked={isMapChecked}
             picture={url}
           />
-        );
+        )
 
       default:
-        return "Unknown stepIndex";
+        return 'Unknown stepIndex'
     }
   }
 
-  const steps = getSteps();
+  const steps = getSteps()
 
   const handleNext = () => {
     if (appName.trim().length !== 0) {
-      setActiveStep((prevActiveStep) => prevActiveStep + 1);
+      setActiveStep((prevActiveStep) => prevActiveStep + 1)
     } else {
-      setIsError(true);
+      setIsError(true)
     }
-  };
+  }
 
   const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
+    setActiveStep((prevActiveStep) => prevActiveStep - 1)
+  }
 
   const handleReset = () => {
-    setActiveStep(0);
-  };
+    setActiveStep(0)
+  }
 
   return (
     <div className={classes.root}>
@@ -233,7 +236,9 @@ let StepperContainer: React.FC<Iprops> = (props) => {
               <Button
                 variant="contained"
                 color="primary"
-                onClick={props.onClose}
+                onClick={() => {
+                  props.onClose()
+                }}
               >
                 Close
               </Button>
@@ -273,19 +278,19 @@ let StepperContainer: React.FC<Iprops> = (props) => {
         )}
       </div>
     </div>
-  );
-};
-let mapStateToProps = (state: AppStateType) => {
+  )
+}
+const mapStateToProps = (state: AppStateType) => {
   return {
     app: state.dashboardPage.currentEditApp,
     userName: state.auth.login,
     userId: state.auth.userId,
     isEditAppMode: state.dashboardPage.isEditAppMode,
-  };
-};
+  }
+}
 export default connect(mapStateToProps, {
   addAppThunk,
   removeAppThunk,
   setEditApp,
   setIsEditAppMode,
-})(StepperContainer);
+})(StepperContainer)
