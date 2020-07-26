@@ -1,7 +1,7 @@
 import React from 'react'
 import classes from './AppFeatures.module.scss'
 import { Switch } from '@material-ui/core'
-
+import classnames from 'classnames'
 import categoriesImg from '../../../../asserts/images/categories.jpg'
 import mapImg from '../../../../asserts/images/map.png'
 
@@ -14,7 +14,7 @@ interface Iprops {
 
 const AppFeatures: React.FC<Iprops> = (props) => {
   return (
-    <div className={[classes.Features, classes.twoColumn].join(' ')}>
+    <div className={classnames(classes.Features, classes.twoColumn)}>
       <div>
         <img src={categoriesImg} alt="categories" />
         <p className={classes.boldTitle}>Categories</p>

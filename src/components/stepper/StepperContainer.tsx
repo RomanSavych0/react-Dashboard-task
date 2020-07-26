@@ -29,6 +29,7 @@ interface Iprops {
     description: string,
     isMapChecked: boolean,
     isCategoryChecked: boolean,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     color: any,
     location: string,
     userId: string | null,
@@ -84,6 +85,7 @@ const StepperContainer: React.FC<Iprops> = (props) => {
   const [isCategoryChecked, setIsCategoryChecked] = React.useState<boolean>(
     props.app.isCategoryChecked,
   )
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [color, setColor] = React.useState<any>(props.app.color)
   const [location, setLocation] = React.useState<string>(props.app.location)
 
@@ -92,7 +94,8 @@ const StepperContainer: React.FC<Iprops> = (props) => {
     const isErr: boolean = isErrorHandler(appName, 30)
     setIsError(isErr)
   }
-  const onDropImage = (Files: any, Url: any) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const onDropImage = (Url: any) => {
     setUrl(Url)
   }
 
@@ -233,7 +236,9 @@ const StepperContainer: React.FC<Iprops> = (props) => {
               <Button
                 variant="contained"
                 color="primary"
-                onClick={props.onClose}
+                onClick={() => {
+                  props.onClose()
+                }}
               >
                 Close
               </Button>

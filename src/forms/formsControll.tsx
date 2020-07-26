@@ -20,7 +20,6 @@ export const renderField: React.FC<IrenderField> = ({
   label,
 
   type,
-
   meta: { touched, error, warning },
 }) => {
   return (

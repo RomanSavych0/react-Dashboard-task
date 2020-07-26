@@ -1,24 +1,21 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { AppStateType } from '../../strore/redux-store'
-import { AppBar, WithStyles } from '@material-ui/core'
+import { AppBar } from '@material-ui/core'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
 import makeStyles from '@material-ui/core/styles/makeStyles'
 import { NavLink } from 'react-router-dom'
 import { signOut } from '../../strore/auth/auth-reducer'
-
-const styles = {
-  root: {
-    background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
-  },
-}
+import { setAppsThunk } from '../../strore/dashboard/dashboard-reducer'
+import { IApp } from '../../strore/dashboard/types'
 
 interface IProps {
   email: string | null
   isAuthorized: boolean
   signOut: () => void
+  setAppsThunk: (userID: string | null, apps: Array<IApp>) => void
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -61,7 +58,13 @@ const Header: React.FC<IProps> = (props) => {
               {isAuth ? (
                 <div>
                   {props.email}
-                  <Button color="inherit" onClick={props.signOut}>
+                  <Button
+                    color="inherit"
+                    onClick={() => {
+                      props.setAppsThunk(null, [])
+                      props.signOut()
+                    }}
+                  >
                     Sign out
                   </Button>
                 </div>
@@ -83,4 +86,4 @@ const mapStateToProps = (state: AppStateType) => {
   }
 }
 
-export default connect(mapStateToProps, { signOut })(Header)
+export default connect(mapStateToProps, { signOut, setAppsThunk })(Header)

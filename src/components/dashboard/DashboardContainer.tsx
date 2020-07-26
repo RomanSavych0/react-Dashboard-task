@@ -42,8 +42,20 @@ class DashboardContainer extends React.Component<PropsType, StateType> {
   state = {
     apps: this.props.apps,
   }
+  closeHandler = () => {
+    this.props.setEditApp({
+      name: ' ',
+      imageUrl: [' '],
+      location: '',
+      description: '',
+      color: {},
+      isCategoryChecked: false,
+      isMapChecked: false,
+    })
+    this.props.closeEditor()
+  }
 
-  componentDidUpdate(prevProps: PropsType, prevState: StateType) {
+  componentDidUpdate() {
     if (this.props.apps !== this.state.apps) {
       this.props.setAppsThunk(this.props.userId)
       this.setState({
@@ -77,14 +89,23 @@ class DashboardContainer extends React.Component<PropsType, StateType> {
                   color="primary"
                   onClick={this.props.openEditor}
                 >
-                  <b>+</b> Create App
+                  <b
+                    style={{
+                      justifyContent: 'center',
+                      height: '100%',
+                      marginRight: '10px',
+                    }}
+                  >
+                    +
+                  </b>{' '}
+                  Create App
                 </Button>
               </h2>
             </div>
           </div>
           <AppCreator
             isOpened={this.props.isEditorOpen}
-            onClose={this.props.closeEditor}
+            onClose={this.closeHandler}
           />
           Apps:
           <div className={classes.appsWrapper}>

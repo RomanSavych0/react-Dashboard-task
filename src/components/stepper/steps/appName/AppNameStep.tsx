@@ -13,7 +13,7 @@ const AppName: React.FC<IProps> = (props) => {
     <div className={classes.Welcome}>
       <p className={classes.title}>Welcome! Let us help you get started!</p>
       <div className={classes.twoColumn}>
-        <p className={classes.boldTitle}>App Name</p>
+        <div className={classes.boldTitle}>App Name</div>
         <TextField
           error={props.isError}
           id="app_name"
