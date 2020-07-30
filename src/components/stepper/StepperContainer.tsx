@@ -95,7 +95,7 @@ const StepperContainer: React.FC<Iprops> = (props) => {
     setIsError(isErr)
   }
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const onDropImage = (Url: any) => {
+  const onDropImage = (file: any, Url: any) => {
     setUrl(Url)
   }
 

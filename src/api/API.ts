@@ -18,7 +18,7 @@ export const removeAppAPI = async (userId: string | null, app: IApp) => {
     .update({
       name: app.name,
       description: app.description,
-      imageUrl: app.imageUrl,
+      imageUrl: [app.imageUrl[0]],
       isCategoryChecked: app.isCategoryChecked,
       isMapChecked: app.isMapChecked,
       location: app.location,

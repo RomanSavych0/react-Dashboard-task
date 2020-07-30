@@ -14,13 +14,14 @@ interface Iprops {
 }
 
 const AppItem: React.FC<Iprops> = (props) => {
+  console.log(props.app.imageUrl)
   return (
     <Paper className={classes.appWrapper}>
       <div className={classes.item}>
         {
           <img
             src={`${
-              props.app.imageUrl[0] === ' ' || undefined
+              props.app.imageUrl === undefined || props.app.imageUrl[0] === ' '
                 ? appDefaultImage
                 : props.app.imageUrl[0]
             }`}
